@@ -1,0 +1,127 @@
+@font-face {
+	font-family: 'icomoon';
+	src:url('http://seattletimes.com/css/2013/fonts/icomoon.eot');
+	src:url('http://seattletimes.com/css/2013/fonts/icomoon.eot?#iefix') format('embedded-opentype'),
+		url('http://seattletimes.com/css/2013/fonts/icomoon.svg#icomoon') format('svg'),
+		url('http://seattletimes.com/css/2013/fonts/icomoon.woff') format('woff'),
+		url('http://seattletimes.com/css/2013/fonts/icomoon.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+/*
+Use this class if you need an icon in text.
+example: <div class="icon_character">hello &#xe002;</div>
+*/
+[data-icon], .icon_character {
+	font-family: 'icomoon';
+	speak: none;
+	font-weight: normal;
+	-webkit-font-smoothing: antialiased;
+	color: $site-orange;
+	content: attr(data-icon);
+}
+
+
+[class^="icon-"]:before {
+	@extend [data-icon];
+	color: $site-orange;
+	position: absolute;
+	top:0;
+	left:0;
+	font-size: 1.2em;
+}
+
+.more{position: relative;}
+
+ [class*="icon-"], 
+.Photograph, .Photo_Gallery,
+.Video,.Internal, .Related_story, 
+.Print, .External, .Talk_About_It,
+.Graphic_Animation
+{
+    padding-left: 1.6em;
+    position: relative;
+}
+
+
+.icon-square:before, .Internal:before, .Related_story:before {
+	content: "\25fe";
+	@extend [class^="icon-"]:before;
+	font-size: 1.1em
+}
+.icon-email:before {
+	content: "\e00c";
+}
+.icon-external:before, .External:before {
+	content: "\25a1";
+	@extend [class^="icon-"]:before;
+}
+.icon-photo:before,.Photograph:before, .Photo_Gallery:before {
+	content: "\25d9";
+	@extend [class^="icon-"]:before;
+}
+.icon-magnifyplus:before {
+	content: "\26b2";
+	color: $site-dark-gray;
+}
+.icon-circle_arrow:before {
+	content: "\27f3";
+}
+.icon-comments:before, .Talk_About_It:before {
+	content: "\25b4";
+	font-size: 1.2em;
+}
+.icon-print:before, .Print:before {
+	content: "\25b8";
+	@extend [class^="icon-"]:before;
+	font-size: 1.2em;
+}
+.icon-traffic:before {
+	content: "\e004";
+}
+.icon-rss:before {
+	content: "\25fd";
+}
+.icon-home:before {
+	content: "\e00d";
+}
+.icon-facebook:before {
+	content: "\e006";
+	color: #134589;
+}
+.icon-twitter:before {
+	content: "\e00b";
+	color: #12b2ee;
+}
+.icon-google_plus:before {
+	content: "\e007";
+	color: #d23a25;
+}
+.icon-video:before, .Video:before, .King_Video:before, .AP_video:before {
+	content: "\e005";
+	font-size: 1.2em;
+	@extend [class^="icon-"]:before;
+}
+.more:after {
+	content: "\25b6";
+	margin-left: .2em;
+	font-size: .88em;
+	@extend [data-icon]:before;
+}
+.icon-back:before{
+    content: "\e009";
+    top:-1px;
+}
+.Graphic_Animation:before, .icon-chart:before{
+	content: "\e003";
+	@extend [class^="icon-"]:before;
+}
+.icon-checkmark:before{
+	content: "\e001";
+
+}
+.icon-info:before{
+	content: "\e000";
+	font-family: 'icomoon';
+}

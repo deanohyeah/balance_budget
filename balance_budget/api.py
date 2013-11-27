@@ -6,10 +6,20 @@ from .models import *
 
 
 
+class JustCategoryResource(ModelResource):
+
+    class Meta:
+        queryset = Category.objects.all()
+        resource_name = 'category'
+        max_limit = None
+
 class SectionResource(ModelResource):
+    category = fields.ForeignKey(JustCategoryResource, 'category',full=True)
+
     class Meta:
         queryset = Section.objects.all()
         resource_name = 'sections'
+        full = True
 
 
 class CategoryResource(ModelResource):
@@ -18,5 +28,6 @@ class CategoryResource(ModelResource):
     class Meta:
         queryset = Category.objects.all()
         resource_name = 'category'
+        max_limit = None
 
 

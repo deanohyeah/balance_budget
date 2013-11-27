@@ -1,0 +1,697 @@
+@import "mixins";
+@import "global_vars";
+@import "icons";
+
+/*main styles*/
+#seattletimesbudget{
+    #header{
+        margin-bottom:20px;
+    }
+    
+    #footer  {
+        margin-top:20px;
+    }
+    
+    h1{
+        font-family:Georgia, serif;
+        font-weight:normal;
+    }
+    
+    h3 {
+        font-size:1.2em;
+        color:#000;
+    }
+    .vspacing {
+        height:30px;
+    }
+    .summary {
+        color:#000!important;
+    }
+    .key {
+        font-size:10px;
+        color:#666;
+        font-style: italic;
+    }
+    .byline {
+        font-size:11px!important;
+        margin:15px 0px 5px 0px!important;
+    }
+    .source{
+        font-size:11px!important;
+        margin:0px 0px 10px 0px;
+    }
+    .chart {
+        float:right;
+        width:45%;
+        margin:0px 0px 10px 25px;
+        background:#f2f1ea;
+        /*background:#eee;*/
+        padding:30px;
+        h4 {
+            text-align: center;
+        }
+        img {
+            display:block;
+            margin:15px 0px;
+        }
+        cite {
+        }
+        .caption {
+            font-family:'Georgia', serif;
+            font-size:14px!important;
+        }
+    }
+    h2.hedline6 {
+        font-size: 31px!important;
+        margin-bottom: 7px;
+        color:#000;
+        font-weight:normal!important;
+    }
+    /*proposals*/
+    .proposal_section {
+        h4 {
+            text-transform:uppercase;
+            color:#333;
+            border-top:1px solid #ccc;
+            padding-top:5px;
+            margin-top:10px;
+            border:0px;
+            font-size:1em;
+        }
+        .proposal_list{
+            .row {
+                margin-bottom:1px!important;
+                font-size:12px;
+                font-weight:bold;
+            }
+            .eightcol {
+                font-size:13px;
+            }
+        }
+    }
+    
+    .proposal_info {
+        display: none;  
+        position: absolute;
+        left:20px;
+        width:400px;
+        background: white;
+        color: black;
+        z-index: 10000;
+        padding: 20px 20px 20px 20px;
+        font-weight: normal;
+        font-style: normal;
+        text-align: left;
+        font-family:georgia, serif;
+        font-size:14px;
+        box-shadow:0px 0px 10px $darkgray!important;
+    
+        left:50px;
+        h4 {
+            font-family:arial, sans-serif;
+            margin:10px 0  5px 0;
+            border-bottom:2px solid #ccc;
+        }
+    }
+    
+    .proposal{
+        cursor:e-resize;
+        /*@include rounded_corners;*/
+        padding:5px;
+        color:#fff;
+    }
+    
+    .inactive {
+        color:#999;
+        background:#eee!important;
+        cursor:not-allowed;
+    }
+    .proposal_info {
+        h4 {
+            display:none;
+        }
+    }
+    
+    .inactive:hover, .proposal_container .connected_proposal {
+        background-image:url('http://seattletimes.com/ABPub/2013/03/19/2020596247.png')!important;
+    }
+    
+    
+    .section_inner_wrapper {
+        border-top:1px solid #fff;
+        padding:5px;
+        div {display: none;}
+        
+    }
+    
+    /*budget*/
+    .savings_label {
+        font-weight: normal;
+        color:#555;
+        padding:3px 10px;
+        font-weight:bold;
+        background:#eee;
+        border-radius: 6px 0px 6px 0px;
+        margin-left:7px;
+    }
+    .budget_container {
+        border:1px solid #777;
+        position:relative;
+        background-position: center center;
+        background-repeat:no-repeat;
+        
+        li {
+            display: none;
+        }
+        
+    }
+    
+    .budget_container.active {
+        border:3px dashed #c5e9f1;
+        box-sizing: border-box;
+    }
+    
+    .budget{
+        position: relative;
+    }
+        
+    .budget_proposal_container {
+        width:100%;
+        height:100%;
+    }
+    #instructions {
+        width:80%;
+        margin:0px auto;
+        font-size:1.2em;
+        color:#999;
+        text-align:center;
+        top:36%;
+        position:relative;
+        z-index:0;
+    }
+    .section_label {
+        color:#fff;
+        background:#000;
+        opacity: .5;
+        width:30%;
+        margin:0px auto;
+        padding:10px;
+        text-align:center;
+    }
+    .axis_label {
+        display:block;  
+        width:100%;
+        position: absolute;
+        border-bottom:1px solid #ccc;
+            strong {
+                font-size:14px;
+            }
+            .nested_axis {
+                position:absolute;
+                margin-top:10px;
+            }
+    }
+    .deficit.axis_label{
+        font-size:13px;
+        padding-bottom:10px;
+    }
+    .icon-checkmark:before {
+        color: $benchmarkgreen!important;
+    }
+    .reached_goal.icon-checkmark {
+        left: 0px;
+        top:0;
+        position: absolute;
+        background-repeat:no-repeat;
+        background-position: center top;
+        height:20px;
+        width:25px;
+        font-size:15px;
+        color: $benchmarkgreen!important;
+    }
+    
+    .axis_label.active {
+        padding-left:25px;
+        color: $benchmarkgreen!important;
+    }
+    
+    .axis_label strong{
+        display:block;
+    }
+    
+    .line {
+        height:1px;
+        width: 110%;
+        border-bottom:1px dashed #ccc;
+        position: absolute;
+        margin-bottom:-1px;
+    }
+    
+    .repub {
+        top:50px;
+    }
+    
+    .balanced{
+        top:100px;
+    }
+    
+    .deficit{
+        bottom:0;
+        position: absolute;
+    }
+    
+    .benchmarks{
+        top: 0;
+        bottom: 0;
+        position: absolute;
+        right: 0;
+    }
+    .benchmark_descrip, .benchmark_descrip_mobile {
+        font-size: 12px;
+    }
+    .benchmark_descrip_mobile{
+        display:none;
+    }
+    .budget_container {
+        .row {
+            margin:0px;
+            border-radius: 0px;
+            overflow: hidden;
+            width: auto;
+        }
+        
+        li {
+            position:relative;
+            bottom:0px;
+            padding: 0!important;
+        }
+    }
+    
+    .fixed {
+            position: fixed;
+            top: 50px;
+            z-index: 2;
+            background: white;
+            /*
+    transition: all .3s ease-out;
+            -webkit-transition: all .3s ease-out;
+            -moz-transition: all .3s ease-out;
+            -o-transition: all .3s ease-out;
+    */
+        }
+    .hug_footer {
+            position: absolute;
+            bottom: 0px;
+            right: 0;
+        }   
+    .bottom_container{
+            position:absolute;
+            bottom:0;
+            width:100%;
+            .proposal.active{
+                /*
+    min-height: 25px!important;
+                 cursor:w-resize;
+                 .section_inner_wrapper > div{display: block;}
+    */
+            }
+        }
+    
+    li {list-style: none;}
+    .category{
+        min-height: 50px;
+    }
+    
+    
+    /*individual section colors ---------------------------------------
+    probably need a better way to generate these on the fly so we don't
+    have to add to the stylesheet every time there's a new category
+    ----------------------------------------------------------------- */
+    
+    .budget_proposal_container {
+        .connected_proposal, li:hover   {
+            background-image:url('http://seattletimes.com/ABPub/2013/03/19/2020596248.png')!important;
+        }
+    }
+    .icon-info{
+            /*to do: fix this. why vertical align no work waaaah*/
+            float:right;
+            margin-top:8%;
+    }
+    .icon-info:hover{cursor: pointer;}
+    li.k-12-education {
+        background:darken($color4, 20%);
+        &.active {
+            background: darken($color4, 30%);
+        }
+        .icon-info:before,
+        &.connected_proposal,
+        &.connected_proposal strong,
+        &:hover,
+        &:hover strong {
+            color:lighten($color4, 20%)!important;
+        }
+    }
+    
+    li.general-government {
+        background:darken($color2, 15%);
+    
+        &.active {
+            background: darken($color2, 25%);
+        }
+        .icon-info:before,
+        &.connected_proposal,
+        &.connected_proposal strong,
+        &:hover,
+        &:hover strong  {
+            color:$color2!important;
+        }
+    }
+    
+    li.health-care{
+        background:darken($color6, 20%);
+        &.active {
+            background: darken($color6, 30%);
+        }
+        .icon-info:before,
+        &.connected_proposal,
+        &.connected_proposal strong,
+        &:hover,
+        &:hover strong {    
+            color:$color6!important;
+        }
+    }
+    
+    li.budget-shift{
+        background:darken($color11, 10%);
+        &.active {
+            background: darken($color11, 20%);
+        }
+        .icon-info:before,
+        &.connected_proposal,
+        &.connected_proposal strong,
+        &:hover,
+        &:hover strong {
+            color:$color11!important;
+        }
+    }
+    
+    li.higher-education {
+        background:darken($color3, 20%);
+    
+        &.active {
+            background: darken($color3, 30%);
+        }
+        .icon-info:before,
+        &.connected_proposal,
+        &.connected_proposal strong,
+        &:hover,
+        &:hover strong {
+            color:$color3!important;
+        }
+    }
+    
+    li.public-safety {
+        background:darken($color5, 20%);
+    
+        &.active {
+            background: darken($color5, 30%);
+        }
+        .icon-info:before,
+        &.connected_proposal,
+        &.connected_proposal strong,
+        &:hover,
+        &:hover strong {
+            color:$color5!important;
+        }
+    }
+    
+    li.social-services {
+        background:darken($color7, 20%);
+    
+        &.active {
+            background: darken($color7, 30%);
+        }
+        .icon-info:before,
+        &.connected_proposal,
+        &.connected_proposal strong,
+        &:hover,
+        &:hover strong {
+            color:$color7!important;
+        }
+    }
+    
+    li.state-employees {
+        background:darken($color8, 20%);
+    
+        &.active {
+            background: darken($color8, 30%);
+        }
+        .icon-info:before,
+        &.connected_proposal,
+        &.connected_proposal strong,
+        &:hover,
+        &:hover strong {
+            color:$color8!important;
+        }
+    }
+    
+    li.taxes {
+        background:darken($color9, 20%);
+    
+        &.active {
+            background: darken($color9, 30%);
+        }
+        .icon-info:before,
+        &.connected_proposal,
+        &.connected_proposal strong,
+        &:hover,
+        &:hover strong {
+            color:$color9!important;
+        }
+    }
+    
+    li.natural-resources {
+        background:darken($color10, 20%);
+    
+        &.active {
+            background: darken($color10, 30%);
+        }
+        .icon-info:before,
+        &.connected_proposal,
+        &.connected_proposal strong,
+        &:hover,
+        &:hover strong {
+            color:$color10!important;
+        }
+    }
+    
+    #google_st_610{
+        display: none;
+    }
+    .credit {
+        color:#999;
+        font-size:11px!important;
+        margin-bottom:0!important;
+    }
+    .copyright {
+        display:none;
+    }
+}
+
+/*mobile---------------------------------------
+
+----------------------------------------------------------------- */
+
+@media handheld, only screen and (max-width: 767px) {
+    body { 
+       
+            .st_logo .bold {display:none;}
+             #seattletimesbudget{ 
+                .eightcol.proposal_container {
+                    width:60%;
+                }
+                .proposal_list .eightcol{
+                    width:100%;
+                    font-size:1.2em;
+                }
+                .chart {
+                    display:block;
+                    float:none;
+                    width:85%;
+                    border-bottom:3px solid #e1dfd4;
+                    border-top:3px solid #e1dfd4;
+                    background:#f2f1ea;
+                    padding:20px;   
+                    margin:15px 0px 20px 0px;
+                    img {
+                        width:100%;
+                        margin:0px auto 10px auto;
+                    }
+                    .caption {
+                       
+                    }
+                }
+                .proposal{
+                    padding-right:10px;
+                }
+                .fourcol.proposal_container{
+                    width:60% !important;
+                    float: left;
+                }   
+                #budgetUnique h3, .proposal_container h3{
+                    font-size:16px;
+                    font-family:georgia;
+                    font-weight:normal;
+                    font-style: italic;
+                    width:100%;
+                    color:#666;
+                    margin-bottom:10px;
+                }
+                
+                #instructions {
+                    display:none;
+                }
+                
+                
+                .proposal_info {
+                        width:200px;
+                        left:-115px;
+                        top:20px;
+                        z-index: 10000;
+                        box-shadow:0px 0px 0px black;
+                }
+    
+                .budget_container{
+                    width:20%;
+                    margin-right:0px;
+                    background-image: none;
+                    .proposal {
+                        text-indent: -2000px;
+                    }
+                }
+                .sevencol.benchmarks {
+                    width:85%;
+                }
+                .axis_label{
+                    padding:0 0 0px 5px;
+                    strong{
+                     font-size:11px;
+                     line-height:10px;
+                    }
+                }
+                .benchmark_descrip{
+                    display:none;
+                }
+                .benchmark_descrip_mobile, .deficit.axis_label {
+                    display:block;
+                    line-height:12px!important;
+                    font-size:11px;
+                    margin:2px 0px;
+                }
+                
+                .proposal_list {
+                    .row .twocol {
+                            width:80%;
+                            display:block;
+                            margin-bottom:5px;
+                        &.last {
+                            width:10%;
+                            float:right;
+                            margin:0;
+                            }
+                        strong {
+                            font-size:1em!important;
+                            display:block;
+                            font-weight:normal;
+                            float:left;
+                            
+                        }
+                    }
+                }
+                
+                .icon-info {
+                    height: 13px;
+                    position: relative;
+                    font-size:9px;
+                    float:right;
+                }
+                .inactive:hover, .proposal_container .connected_proposal {
+                    background-image:none!important;
+                    color:#666!important;
+                    /*too many !importants make lauren a sad girl*/
+                }
+                
+                .savings_label {
+                    display:block;
+                    float:none;
+                    margin:0;
+                    font-size:13px;
+                }
+                
+                #footer {
+                    display:none;
+                }
+                .copyright {
+                    display:block!important;
+                }
+        }
+    }
+}
+/*share button*/
+.share_buttons {
+        float:right;
+        border-left:1px solid #ccc;
+        padding-left:10px;
+        margin:5px 0px 10px 5px;
+        width:80px;
+        height:60px;
+        position: relative;
+        z-index: 2;
+    }
+/*grid*/
+    .clearfix:after{
+            content: "";
+            display: table;
+            clear: both;
+    }
+    .clear{
+        clear:both;
+    }
+    .container {
+        padding: 0 10px;
+        width: 960px;
+        margin: 0 auto;
+        background: white;
+    }
+    
+    .onecol, .twocol,.two-pluscol, .threecol, .fourcol, .fivecol, .sixcol, .sevencol, .eightcol, .ninecol, .tencol, .elevencol {
+        margin-right: 3.8%;
+        float: left;
+        min-height: 1px;
+    }
+    
+    .row {
+        width: 100%;
+        margin-bottom: 10px;
+        position: relative;
+        padding-bottom: 4px;
+        .onecol {width: 4.85%;}
+        .twocol {width: 13.45%;}
+        .two-pluscol {width: 19%;}
+        .threecol {width: 22.05%;}
+        .fourcol {width: 30.75%;}
+        .fivecol {width: 39.45%;}
+        .sixcol {width: 48%;
+            section{margin: 0;padding: 0;}
+        }
+        .sevencol {width: 56.75%;}
+        .eightcol {width: 65.4%;}
+        .ninecol {width: 74.05%;}
+        .tencol {width: 82.7%;}
+        .elevencol {width: 91.35%;}
+        .twelvecol {width: 100%;float: left;}
+        &:after{@extend .clearfix:after;}
+        & > div:last-child, & > aside:last-child  {margin-right: 0px;}
+    }
+    .last {margin-right: 0px;}

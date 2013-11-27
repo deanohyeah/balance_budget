@@ -1,0 +1,268 @@
+/*mix-ins*/
+@font-face {
+  font-family: 'budgeticons';
+  src: url("../../fonts/budgeticons.eot");
+  src: url("../../fonts/budgeticons.eot?#iefix") format("embedded-opentype"), url("../../fonts/butdgeticons.svg#icomoon") format("svg"), url("../../fonts/budgeticons.woff") format("woff"), url("../../fonts/budgeticons.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal; }
+
+/* Use the following CSS code if you want to use data attributes for inserting your icons */
+[data-icon]:before {
+  font-family: 'budgeticons';
+  content: attr(data-icon);
+  speak: none;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased; }
+
+/* Use the following CSS code if you want to have a class per icon */
+.icon-info:before, .icon-checkmark:before {
+  font-family: 'budgeticons';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased; }
+
+.icon-info:before {
+  content: "\e000"; }
+
+.icon-checkmark:before {
+  content: "\e001";
+  color: #4d8330; }
+
+/*main styles*/
+.content {
+  margin: 20px; }
+
+h1 {
+  font-family: Georgia, serif;
+  font-weight: normal; }
+
+/*proposals*/
+.proposal_section h4 {
+  text-transform: uppercase;
+  color: #999;
+  border-top: 1px solid #cccccc;
+  padding-top: 5px;
+  margin-top: 10px;
+  border: 0px; }
+.proposal_section .proposal_list .row {
+  margin-bottom: 1px!important;
+  font-size: 12px; }
+
+.proposal_info {
+  display: none;
+  position: absolute;
+  left: 20px;
+  width: 400px;
+  background: white;
+  color: black;
+  z-index: 2;
+  padding: 20px;
+  font-weight: normal;
+  font-style: normal;
+  text-align: left;
+  font-family: georgia, serif;
+  font-size: 14px;
+  border: 1px solid #cccccc;
+  box-shadow: 0px 0px 20px #333333; }
+  .proposal_info h4 {
+    font-family: arial, sans-serif;
+    margin: 0 0 10px 0;
+    border-bottom: 2px solid #cccccc; }
+
+.info {
+  position: relative;
+  font-style: italic;
+  font-weight: bold;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 1.5em;
+  cursor: pointer;
+  padding-top: 5px; }
+  .info:hover .proposal_info {
+    display: block;
+    left: 50px; }
+
+.proposal {
+  cursor: e-resize;
+  /*@include rounded_corners;*/
+  padding: 5px;
+  color: #fff; }
+
+.inactive {
+  color: #999;
+  background: #eee!important;
+  cursor: not-allowed; }
+
+.section_inner_wrapper {
+  border-top: 1px solid white;
+  padding: 5px; }
+
+/*budget*/
+.savings_label {
+  font-weight: normal;
+  color: #666666; }
+
+.budget_container {
+  border: 1px solid #777777;
+  position: relative;
+  background-image: url("../../images/drag_here.png");
+  background-position: center center;
+  background-repeat: no-repeat; }
+  .budget_container li {
+    display: none; }
+
+.budget_container.active {
+  border: 3px dashed #c5e9f1;
+  box-sizing: border-box; }
+
+.budget {
+  position: relative; }
+
+.budget_proposal_container {
+  width: 100%;
+  height: 100%; }
+
+.axis_label {
+  border-left: 3px solid #cccccc;
+  padding-left: 5px;
+  vertical-align: middle;
+  font-size: 10px;
+  display: block;
+  position: absolute;
+  bottom: 0;
+  right: -125px;
+  width: 13%; }
+
+.reached_goal.icon-checkmark {
+  left: -30px;
+  top: 0;
+  position: absolute;
+  background-repeat: no-repeat;
+  background-position: center top;
+  height: 20px;
+  width: 25px;
+  font-size: 20px; }
+
+.axis_label.active {
+  border-left: 3px solid #4d8330;
+  color: #4d8330; }
+
+.axis_label strong {
+  display: block; }
+
+.line {
+  height: 1px;
+  width: 100%;
+  background: #ccc;
+  position: absolute; }
+
+.repub {
+  top: 50px; }
+
+.balanced {
+  top: 100px; }
+
+.deficit {
+  bottom: 0;
+  position: absolute; }
+
+.benchmarks {
+  top: 0;
+  bottom: 0;
+  position: absolute;
+  right: 0; }
+
+.budget_container .row {
+  margin: 0px;
+  border-radius: 0px;
+  overflow: hidden;
+  width: auto; }
+.budget_container li {
+  position: relative;
+  bottom: 0px;
+  padding: 0!important; }
+.budget_container .proposal.row.active {
+  display: block!important; }
+
+.bottom_container {
+  position: absolute;
+  bottom: 0;
+  width: 100%; }
+  .bottom_container .proposal.active {
+    min-height: 25px!important;
+    cursor: w-resize; }
+
+li {
+  list-style: none; }
+
+.category {
+  min-height: 50px; }
+
+/*individual section colors ---------------------------------------
+probably need a better way to generate these on the fly so we don't
+have to add to the stylesheet every time there's a new category
+----------------------------------------------------------------- */
+.budget_container li {
+  text-indent: -2000px; }
+  .budget_container li:hover {
+    text-indent: 0px; }
+
+li.k-12-education {
+  background: #594047; }
+  li.k-12-education:hover {
+    background: #3c2a30; }
+
+li.environment-and-energy {
+  background: #617258; }
+  li.environment-and-energy:hover {
+    background: #495542; }
+
+li.social-and-health-services {
+  background: #d87f3c; }
+  li.social-and-health-services:hover {
+    background: #bc6626; }
+
+li.higher-education {
+  background: #529bac; }
+  li.higher-education:hover {
+    background: #427c89; }
+
+/*mobile---------------------------------------
+
+----------------------------------------------------------------- */
+@media handheld, only screen and (max-width: 767px) {
+  body .proposal {
+    padding-right: 10px; }
+  body .fourcol.proposal_container {
+    width: 60%;
+    height: 500px!important; }
+  body .eightcol.budget {
+    width: 20%;
+    float: left;
+    margin-left: 10px; }
+    body .eightcol.budget h3 {
+      font-size: 1.1rem; }
+  body .info:hover .proposal_info {
+    width: 250px;
+    left: -150px;
+    top: 50px; }
+  body .budget_container {
+    background-image: none; }
+    body .budget_container .proposal {
+      text-indent: -2000px; }
+    body .budget_container .reached_goal {
+      font-size: 15px;
+      display: none; }
+  body .axis_label {
+    right: -30px; }
+  body .proposal_list .row .threecol strong {
+    font-size: 8px!important; }
+  body [class*="icon-"] {
+    padding-left: 15px; }
+  body .savings_label {
+    display: none; } }

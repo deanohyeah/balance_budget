@@ -1,0 +1,37 @@
+@font-face {
+	font-family: 'budgeticons';
+	src:url('../../fonts/budgeticons.eot');
+	src:url('../../fonts/budgeticons.eot?#iefix') format('embedded-opentype'),
+		url('../../fonts/butdgeticons.svg#icomoon') format('svg'),
+		url('../../fonts/budgeticons.woff') format('woff'),
+		url('../../fonts/budgeticons.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+/* Use the following CSS code if you want to use data attributes for inserting your icons */
+[data-icon]:before {
+	font-family: 'budgeticons';
+	content: attr(data-icon);
+	speak: none;
+	font-weight: normal;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+}
+
+/* Use the following CSS code if you want to have a class per icon */
+.icon-info:before, .icon-checkmark:before {
+	font-family: 'budgeticons';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+}
+.icon-info:before {
+	content: "\e000";
+}
+.icon-checkmark:before {
+	content: "\e001";
+	color:$benchmarkgreen;
+}

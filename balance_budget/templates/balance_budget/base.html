@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>{% block title %}{% endblock %}</title>
+    {% block csslibs %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}lib/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="{{ STATIC_URL }}stylesheets/compiled/styles.css" />
+    {% endblock %}
+    {% block customcss %}{% endblock %}
+</head>
+<body>
+    {% block navbar %}
+    {% endblock %}
+    {% block header %}{% endblock %}
+    {% block content %}{% endblock %}
+    {% block footer %}{% endblock %}
+    {% block jslibs %}{% endblock %}
+    {% block customjs %}{% endblock %}
+</body>
+</html>

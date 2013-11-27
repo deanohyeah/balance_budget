@@ -1,0 +1,612 @@
+/*mix-ins*/
+/*k12 edu */
+/*general gov */
+/*higher edu*/
+/*k12 edu */
+/*public safety*/
+/* health care */
+/*social services*/
+/*state employees*/
+/*taxes*/
+/*natural resources*/
+/*budget shift*/
+/*
+$color1: #6a6d95;
+$color2: #88aeb7;
+$color3: #e59f80;
+$color4: #b2d18d;
+$color5: #3288BD;
+$color6: #3288BD;
+$color7: #3288BD;
+$color8: #66C2A5;
+$color9: #3288BD;*/
+/* variables.scss */
+/* base vars */
+/* colors */
+/* #ccc */
+/* #575757 */
+/* 333 */
+/* fonts */
+/* Provides rems for newer browsers, provides fallback of pixels. */
+/* allows all style sheets (ie.css,style.css and main) to use this style */
+@font-face {
+  font-family: 'icomoon';
+  src: url("http://seattletimes.com/css/2013/fonts/icomoon.eot");
+  src: url("http://seattletimes.com/css/2013/fonts/icomoon.eot?#iefix") format("embedded-opentype"), url("http://seattletimes.com/css/2013/fonts/icomoon.svg#icomoon") format("svg"), url("http://seattletimes.com/css/2013/fonts/icomoon.woff") format("woff"), url("http://seattletimes.com/css/2013/fonts/icomoon.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal; }
+
+/*
+Use this class if you need an icon in text.
+example: <div class="icon_character">hello &#xe002;</div>
+*/
+[data-icon], [class^="icon-"]:before, .icon-square:before, .Internal:before, .Related_story:before, .icon-external:before, .External:before, .icon-photo:before, .Photograph:before, .Photo_Gallery:before, .icon-print:before, .Print:before, .icon-video:before, .Video:before, .King_Video:before, .AP_video:before, .Graphic_Animation:before, .icon-chart:before, .icon_character {
+  font-family: 'icomoon';
+  speak: none;
+  font-weight: normal;
+  -webkit-font-smoothing: antialiased;
+  color: #bc5c23;
+  content: attr(data-icon); }
+
+[class^="icon-"]:before, .icon-square:before, .Internal:before, .Related_story:before, .icon-external:before, .External:before, .icon-photo:before, .Photograph:before, .Photo_Gallery:before, .icon-print:before, .Print:before, .icon-video:before, .Video:before, .King_Video:before, .AP_video:before, .Graphic_Animation:before, .icon-chart:before {
+  color: #bc5c23;
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 1.2em; }
+
+.more {
+  position: relative; }
+
+[class*="icon-"],
+.Photograph, .Photo_Gallery,
+.Video, .Internal, .Related_story,
+.Print, .External, .Talk_About_It,
+.Graphic_Animation {
+  padding-left: 1.6em;
+  position: relative; }
+
+.icon-square:before, .Internal:before, .Related_story:before {
+  content: "\25fe";
+  font-size: 1.1em; }
+
+.icon-email:before {
+  content: "\e00c"; }
+
+.icon-external:before, .External:before {
+  content: "\25a1"; }
+
+.icon-photo:before, .Photograph:before, .Photo_Gallery:before {
+  content: "\25d9"; }
+
+.icon-magnifyplus:before {
+  content: "\26b2";
+  color: #575757; }
+
+.icon-circle_arrow:before {
+  content: "\27f3"; }
+
+.icon-comments:before, .Talk_About_It:before {
+  content: "\25b4";
+  font-size: 1.2em; }
+
+.icon-print:before, .Print:before {
+  content: "\25b8";
+  font-size: 1.2em; }
+
+.icon-traffic:before {
+  content: "\e004"; }
+
+.icon-rss:before {
+  content: "\25fd"; }
+
+.icon-home:before {
+  content: "\e00d"; }
+
+.icon-facebook:before {
+  content: "\e006";
+  color: #134589; }
+
+.icon-twitter:before {
+  content: "\e00b";
+  color: #12b2ee; }
+
+.icon-google_plus:before {
+  content: "\e007";
+  color: #d23a25; }
+
+.icon-video:before, .Video:before, .King_Video:before, .AP_video:before {
+  content: "\e005";
+  font-size: 1.2em; }
+
+.more:after {
+  content: "\25b6";
+  margin-left: .2em;
+  font-size: .88em; }
+
+.icon-back:before {
+  content: "\e009";
+  top: -1px; }
+
+.Graphic_Animation:before, .icon-chart:before {
+  content: "\e003"; }
+
+.icon-checkmark:before {
+  content: "\e001"; }
+
+.icon-info:before {
+  content: "\e000";
+  font-family: 'icomoon'; }
+
+/*main styles*/
+#seattletimesbudget {
+  /*proposals*/
+  /*budget*/
+  /*individual section colors ---------------------------------------
+  probably need a better way to generate these on the fly so we don't
+  have to add to the stylesheet every time there's a new category
+  ----------------------------------------------------------------- */ }
+  #seattletimesbudget #header {
+    margin-bottom: 20px; }
+  #seattletimesbudget #footer {
+    margin-top: 20px; }
+  #seattletimesbudget h1 {
+    font-family: Georgia, serif;
+    font-weight: normal; }
+  #seattletimesbudget h3 {
+    font-size: 1.2em;
+    color: #000; }
+  #seattletimesbudget .vspacing {
+    height: 30px; }
+  #seattletimesbudget .summary {
+    color: #000!important; }
+  #seattletimesbudget .key {
+    font-size: 10px;
+    color: #666;
+    font-style: italic; }
+  #seattletimesbudget .byline {
+    font-size: 11px!important;
+    margin: 15px 0px 5px 0px !important; }
+  #seattletimesbudget .source {
+    font-size: 11px!important;
+    margin: 0px 0px 10px 0px; }
+  #seattletimesbudget .chart {
+    float: right;
+    width: 45%;
+    margin: 0px 0px 10px 25px;
+    background: #f2f1ea;
+    /*background:#eee;*/
+    padding: 30px; }
+    #seattletimesbudget .chart h4 {
+      text-align: center; }
+    #seattletimesbudget .chart img {
+      display: block;
+      margin: 15px 0px; }
+    #seattletimesbudget .chart .caption {
+      font-family: "Georgia", serif;
+      font-size: 14px!important; }
+  #seattletimesbudget h2.hedline6 {
+    font-size: 31px!important;
+    margin-bottom: 7px;
+    color: #000;
+    font-weight: normal!important; }
+  #seattletimesbudget .proposal_section h4 {
+    text-transform: uppercase;
+    color: #333;
+    border-top: 1px solid #cccccc;
+    padding-top: 5px;
+    margin-top: 10px;
+    border: 0px;
+    font-size: 1em; }
+  #seattletimesbudget .proposal_section .proposal_list .row {
+    margin-bottom: 1px!important;
+    font-size: 12px;
+    font-weight: bold; }
+  #seattletimesbudget .proposal_section .proposal_list .eightcol {
+    font-size: 13px; }
+  #seattletimesbudget .proposal_info {
+    display: none;
+    position: absolute;
+    left: 20px;
+    width: 400px;
+    background: white;
+    color: black;
+    z-index: 10000;
+    padding: 20px 20px 20px 20px;
+    font-weight: normal;
+    font-style: normal;
+    text-align: left;
+    font-family: georgia, serif;
+    font-size: 14px;
+    box-shadow: 0px 0px 10px #333333 !important;
+    left: 50px; }
+    #seattletimesbudget .proposal_info h4 {
+      font-family: arial, sans-serif;
+      margin: 10px 0 5px 0;
+      border-bottom: 2px solid #cccccc; }
+  #seattletimesbudget .proposal {
+    cursor: e-resize;
+    /*@include rounded_corners;*/
+    padding: 5px;
+    color: #fff; }
+  #seattletimesbudget .inactive {
+    color: #999;
+    background: #eee!important;
+    cursor: not-allowed; }
+  #seattletimesbudget .proposal_info h4 {
+    display: none; }
+  #seattletimesbudget .inactive:hover, #seattletimesbudget .proposal_container .connected_proposal {
+    background-image: url("http://seattletimes.com/ABPub/2013/03/19/2020596247.png") !important; }
+  #seattletimesbudget .section_inner_wrapper {
+    border-top: 1px solid white;
+    padding: 5px; }
+    #seattletimesbudget .section_inner_wrapper div {
+      display: none; }
+  #seattletimesbudget .savings_label {
+    font-weight: normal;
+    color: #555;
+    padding: 3px 10px;
+    font-weight: bold;
+    background: #eee;
+    border-radius: 6px 0px 6px 0px;
+    margin-left: 7px; }
+  #seattletimesbudget .budget_container {
+    border: 1px solid #777777;
+    position: relative;
+    background-position: center center;
+    background-repeat: no-repeat; }
+    #seattletimesbudget .budget_container li {
+      display: none; }
+  #seattletimesbudget .budget_container.active {
+    border: 3px dashed #c5e9f1;
+    box-sizing: border-box; }
+  #seattletimesbudget .budget {
+    position: relative; }
+  #seattletimesbudget .budget_proposal_container {
+    width: 100%;
+    height: 100%; }
+  #seattletimesbudget #instructions {
+    width: 80%;
+    margin: 0px auto;
+    font-size: 1.2em;
+    color: #999;
+    text-align: center;
+    top: 36%;
+    position: relative;
+    z-index: 0; }
+  #seattletimesbudget .section_label {
+    color: #fff;
+    background: #000;
+    opacity: .5;
+    width: 30%;
+    margin: 0px auto;
+    padding: 10px;
+    text-align: center; }
+  #seattletimesbudget .axis_label {
+    display: block;
+    width: 100%;
+    position: absolute;
+    border-bottom: 1px solid #cccccc; }
+    #seattletimesbudget .axis_label strong {
+      font-size: 14px; }
+    #seattletimesbudget .axis_label .nested_axis {
+      position: absolute;
+      margin-top: 10px; }
+  #seattletimesbudget .deficit.axis_label {
+    font-size: 13px;
+    padding-bottom: 10px; }
+  #seattletimesbudget .icon-checkmark:before {
+    color: #4d8330 !important; }
+  #seattletimesbudget .reached_goal.icon-checkmark {
+    left: 0px;
+    top: 0;
+    position: absolute;
+    background-repeat: no-repeat;
+    background-position: center top;
+    height: 20px;
+    width: 25px;
+    font-size: 15px;
+    color: #4d8330 !important; }
+  #seattletimesbudget .axis_label.active {
+    padding-left: 25px;
+    color: #4d8330 !important; }
+  #seattletimesbudget .axis_label strong {
+    display: block; }
+  #seattletimesbudget .line {
+    height: 1px;
+    width: 110%;
+    border-bottom: 1px dashed #cccccc;
+    position: absolute;
+    margin-bottom: -1px; }
+  #seattletimesbudget .repub {
+    top: 50px; }
+  #seattletimesbudget .balanced {
+    top: 100px; }
+  #seattletimesbudget .deficit {
+    bottom: 0;
+    position: absolute; }
+  #seattletimesbudget .benchmarks {
+    top: 0;
+    bottom: 0;
+    position: absolute;
+    right: 0; }
+  #seattletimesbudget .benchmark_descrip, #seattletimesbudget .benchmark_descrip_mobile {
+    font-size: 12px; }
+  #seattletimesbudget .benchmark_descrip_mobile {
+    display: none; }
+  #seattletimesbudget .budget_container .row {
+    margin: 0px;
+    border-radius: 0px;
+    overflow: hidden;
+    width: auto; }
+  #seattletimesbudget .budget_container li {
+    position: relative;
+    bottom: 0px;
+    padding: 0!important; }
+  #seattletimesbudget .fixed {
+    position: fixed;
+    top: 50px;
+    z-index: 2;
+    background: white;
+        /*
+transition: all .3s ease-out;
+        -webkit-transition: all .3s ease-out;
+        -moz-transition: all .3s ease-out;
+        -o-transition: all .3s ease-out;
+*/ }
+  #seattletimesbudget .hug_footer {
+    position: absolute;
+    bottom: 0px;
+    right: 0; }
+  #seattletimesbudget .bottom_container {
+    position: absolute;
+    bottom: 0;
+    width: 100%; }
+    #seattletimesbudget .bottom_container .proposal.active {
+            /*
+min-height: 25px!important;
+             cursor:w-resize;
+             .section_inner_wrapper > div{display: block;}
+*/ }
+  #seattletimesbudget li {
+    list-style: none; }
+  #seattletimesbudget .category {
+    min-height: 50px; }
+  #seattletimesbudget .budget_proposal_container .connected_proposal, #seattletimesbudget .budget_proposal_container li:hover {
+    background-image: url("http://seattletimes.com/ABPub/2013/03/19/2020596248.png") !important; }
+  #seattletimesbudget .icon-info {
+    /*to do: fix this. why vertical align no work waaaah*/
+    float: right;
+    margin-top: 8%; }
+  #seattletimesbudget .icon-info:hover {
+    cursor: pointer; }
+  #seattletimesbudget li.k-12-education {
+    background: #b85802; }
+    #seattletimesbudget li.k-12-education.active {
+      background: #864001; }
+    #seattletimesbudget li.k-12-education .icon-info:before, #seattletimesbudget li.k-12-education.connected_proposal, #seattletimesbudget li.k-12-education.connected_proposal strong, #seattletimesbudget li.k-12-education:hover, #seattletimesbudget li.k-12-education:hover strong {
+      color: #fec088 !important; }
+  #seattletimesbudget li.general-government {
+    background: #884747; }
+    #seattletimesbudget li.general-government.active {
+      background: #663535; }
+    #seattletimesbudget li.general-government .icon-info:before, #seattletimesbudget li.general-government.connected_proposal, #seattletimesbudget li.general-government.connected_proposal strong, #seattletimesbudget li.general-government:hover, #seattletimesbudget li.general-government:hover strong {
+      color: #b16a6a !important; }
+  #seattletimesbudget li.health-care {
+    background: #527d87; }
+    #seattletimesbudget li.health-care.active {
+      background: #3f6067; }
+    #seattletimesbudget li.health-care .icon-info:before, #seattletimesbudget li.health-care.connected_proposal, #seattletimesbudget li.health-care.connected_proposal strong, #seattletimesbudget li.health-care:hover, #seattletimesbudget li.health-care:hover strong {
+      color: #88aeb7 !important; }
+  #seattletimesbudget li.budget-shift {
+    background: #4c5945; }
+    #seattletimesbudget li.budget-shift.active {
+      background: #343c2f; }
+    #seattletimesbudget li.budget-shift .icon-info:before, #seattletimesbudget li.budget-shift.connected_proposal, #seattletimesbudget li.budget-shift.connected_proposal strong, #seattletimesbudget li.budget-shift:hover, #seattletimesbudget li.budget-shift:hover strong {
+      color: #65765b !important; }
+  #seattletimesbudget li.higher-education {
+    background: #c38b35; }
+    #seattletimesbudget li.higher-education.active {
+      background: #9b6f2a; }
+    #seattletimesbudget li.higher-education .icon-info:before, #seattletimesbudget li.higher-education.connected_proposal, #seattletimesbudget li.higher-education.connected_proposal strong, #seattletimesbudget li.higher-education:hover, #seattletimesbudget li.higher-education:hover strong {
+      color: #ddb981 !important; }
+  #seattletimesbudget li.public-safety {
+    background: #88a0ac; }
+    #seattletimesbudget li.public-safety.active {
+      background: #6a8897; }
+    #seattletimesbudget li.public-safety .icon-info:before, #seattletimesbudget li.public-safety.connected_proposal, #seattletimesbudget li.public-safety.connected_proposal strong, #seattletimesbudget li.public-safety:hover, #seattletimesbudget li.public-safety:hover strong {
+      color: #c4d0d6 !important; }
+  #seattletimesbudget li.social-services {
+    background: #1d4e6c; }
+    #seattletimesbudget li.social-services.active {
+      background: #123144; }
+    #seattletimesbudget li.social-services .icon-info:before, #seattletimesbudget li.social-services.connected_proposal, #seattletimesbudget li.social-services.connected_proposal strong, #seattletimesbudget li.social-services:hover, #seattletimesbudget li.social-services:hover strong {
+      color: #3288bd !important; }
+  #seattletimesbudget li.state-employees {
+    background: #594047; }
+    #seattletimesbudget li.state-employees.active {
+      background: #3c2a30; }
+    #seattletimesbudget li.state-employees .icon-info:before, #seattletimesbudget li.state-employees.connected_proposal, #seattletimesbudget li.state-employees.connected_proposal strong, #seattletimesbudget li.state-employees:hover, #seattletimesbudget li.state-employees:hover strong {
+      color: #956a77 !important; }
+  #seattletimesbudget li.taxes {
+    background: #467061; }
+    #seattletimesbudget li.taxes.active {
+      background: #325146; }
+    #seattletimesbudget li.taxes .icon-info:before, #seattletimesbudget li.taxes.connected_proposal, #seattletimesbudget li.taxes.connected_proposal strong, #seattletimesbudget li.taxes:hover, #seattletimesbudget li.taxes:hover strong {
+      color: #74a896 !important; }
+  #seattletimesbudget li.natural-resources {
+    background: #869d66; }
+    #seattletimesbudget li.natural-resources.active {
+      background: #6b7f51; }
+    #seattletimesbudget li.natural-resources .icon-info:before, #seattletimesbudget li.natural-resources.connected_proposal, #seattletimesbudget li.natural-resources.connected_proposal strong, #seattletimesbudget li.natural-resources:hover, #seattletimesbudget li.natural-resources:hover strong {
+      color: #b7c5a4 !important; }
+  #seattletimesbudget #google_st_610 {
+    display: none; }
+  #seattletimesbudget .credit {
+    color: #999;
+    font-size: 11px!important;
+    margin-bottom: 0!important; }
+  #seattletimesbudget .copyright {
+    display: none; }
+
+/*mobile---------------------------------------
+
+----------------------------------------------------------------- */
+@media handheld, only screen and (max-width: 767px) {
+  body .st_logo .bold {
+    display: none; }
+  body #seattletimesbudget .eightcol.proposal_container {
+    width: 60%; }
+  body #seattletimesbudget .proposal_list .eightcol {
+    width: 100%;
+    font-size: 1.2em; }
+  body #seattletimesbudget .chart {
+    display: block;
+    float: none;
+    width: 85%;
+    border-bottom: 3px solid #e1dfd4;
+    border-top: 3px solid #e1dfd4;
+    background: #f2f1ea;
+    padding: 20px;
+    margin: 15px 0px 20px 0px; }
+    body #seattletimesbudget .chart img {
+      width: 100%;
+      margin: 0px auto 10px auto; }
+  body #seattletimesbudget .proposal {
+    padding-right: 10px; }
+  body #seattletimesbudget .fourcol.proposal_container {
+    width: 60% !important;
+    float: left; }
+  body #seattletimesbudget #budgetUnique h3, body #seattletimesbudget .proposal_container h3 {
+    font-size: 16px;
+    font-family: georgia;
+    font-weight: normal;
+    font-style: italic;
+    width: 100%;
+    color: #666;
+    margin-bottom: 10px; }
+  body #seattletimesbudget #instructions {
+    display: none; }
+  body #seattletimesbudget .proposal_info {
+    width: 200px;
+    left: -115px;
+    top: 20px;
+    z-index: 10000;
+    box-shadow: 0px 0px 0px black; }
+  body #seattletimesbudget .budget_container {
+    width: 20%;
+    margin-right: 0px;
+    background-image: none; }
+    body #seattletimesbudget .budget_container .proposal {
+      text-indent: -2000px; }
+  body #seattletimesbudget .sevencol.benchmarks {
+    width: 85%; }
+  body #seattletimesbudget .axis_label {
+    padding: 0 0 0px 5px; }
+    body #seattletimesbudget .axis_label strong {
+      font-size: 11px;
+      line-height: 10px; }
+  body #seattletimesbudget .benchmark_descrip {
+    display: none; }
+  body #seattletimesbudget .benchmark_descrip_mobile, body #seattletimesbudget .deficit.axis_label {
+    display: block;
+    line-height: 12px!important;
+    font-size: 11px;
+    margin: 2px 0px; }
+  body #seattletimesbudget .proposal_list .row .twocol {
+    width: 80%;
+    display: block;
+    margin-bottom: 5px; }
+    body #seattletimesbudget .proposal_list .row .twocol.last {
+      width: 10%;
+      float: right;
+      margin: 0; }
+    body #seattletimesbudget .proposal_list .row .twocol strong {
+      font-size: 1em!important;
+      display: block;
+      font-weight: normal;
+      float: left; }
+  body #seattletimesbudget .icon-info {
+    height: 13px;
+    position: relative;
+    font-size: 9px;
+    float: right; }
+  body #seattletimesbudget .inactive:hover, body #seattletimesbudget .proposal_container .connected_proposal {
+    background-image: none!important;
+    color: #666!important;
+    /*too many !importants make lauren a sad girl*/ }
+  body #seattletimesbudget .savings_label {
+    display: block;
+    float: none;
+    margin: 0;
+    font-size: 13px; }
+  body #seattletimesbudget #footer {
+    display: none; }
+  body #seattletimesbudget .copyright {
+    display: block!important; } }
+/*share button*/
+.share_buttons {
+  float: right;
+  border-left: 1px solid #cccccc;
+  padding-left: 10px;
+  margin: 5px 0px 10px 5px;
+  width: 80px;
+  height: 60px;
+  position: relative;
+  z-index: 2; }
+
+/*grid*/
+#seattletimesbudget .clearfix:after, #seattletimesbudget .row:after {
+  content: "";
+  display: table;
+  clear: both; }
+#seattletimesbudget .clear {
+  clear: both; }
+#seattletimesbudget .container {
+  padding: 0 10px;
+  width: 960px;
+  margin: 0 auto;
+  background: white; }
+#seattletimesbudget .onecol, #seattletimesbudget .twocol, #seattletimesbudget .two-pluscol, #seattletimesbudget .threecol, #seattletimesbudget .fourcol, #seattletimesbudget .fivecol, #seattletimesbudget .sixcol, #seattletimesbudget .sevencol, #seattletimesbudget .eightcol, #seattletimesbudget .ninecol, #seattletimesbudget .tencol, #seattletimesbudget .elevencol {
+  margin-right: 3.8%;
+  float: left;
+  min-height: 1px; }
+#seattletimesbudget .row {
+  width: 100%;
+  margin-bottom: 10px;
+  position: relative;
+  padding-bottom: 4px; }
+  #seattletimesbudget .row .onecol {
+    width: 4.85%; }
+  #seattletimesbudget .row .twocol {
+    width: 13.45%; }
+  #seattletimesbudget .row .two-pluscol {
+    width: 19%; }
+  #seattletimesbudget .row .threecol {
+    width: 22.05%; }
+  #seattletimesbudget .row .fourcol {
+    width: 30.75%; }
+  #seattletimesbudget .row .fivecol {
+    width: 39.45%; }
+  #seattletimesbudget .row .sixcol {
+    width: 48%; }
+    #seattletimesbudget .row .sixcol section {
+      margin: 0;
+      padding: 0; }
+  #seattletimesbudget .row .sevencol {
+    width: 56.75%; }
+  #seattletimesbudget .row .eightcol {
+    width: 65.4%; }
+  #seattletimesbudget .row .ninecol {
+    width: 74.05%; }
+  #seattletimesbudget .row .tencol {
+    width: 82.7%; }
+  #seattletimesbudget .row .elevencol {
+    width: 91.35%; }
+  #seattletimesbudget .row .twelvecol {
+    width: 100%;
+    float: left; }
+  #seattletimesbudget .row > div:last-child, #seattletimesbudget .row > aside:last-child {
+    margin-right: 0px; }
+#seattletimesbudget .last {
+  margin-right: 0px; }

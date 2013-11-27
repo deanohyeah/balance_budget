@@ -1,0 +1,45 @@
+/* variables.scss */
+/* base vars */
+$base-gray: #303030;
+$base-font-size: 12;
+
+/* colors */
+$site-border-gray: lighten($base-gray, 61%);/* #ccc */
+$site-dark-gray:lighten($base-gray, 15.2%);/* #575757 */
+$label-gray: lighten($base-gray, 1%); /* 333 */
+
+$site-orange: #BC5C23;
+$site-blue: #09334B;
+$site-black: black;
+
+/* fonts */
+$georgia: Georgia, Times, serif;
+$arial: Arial, Helvetica, sans-serif;
+
+$dark_border:1px solid $site-dark-gray;
+$border: solid 1px $site-border-gray;
+$divider_gradient:left, #FFFFFF 0%, #D3DBDE 100%;
+
+/* Provides rems for newer browsers, provides fallback of pixels. */
+@mixin font-sizes($size) {
+  font-size:$size+px;
+  font-size: ($size/$base-font-size)+rem; 
+}
+
+/* allows all style sheets (ie.css,style.css and main) to use this style */
+@mixin strong_borders{
+    color:$site-black;
+    border-top: solid $site-black 3px;
+    border-bottom: solid 1px $site-border-gray;
+    padding: 6px 0;
+    text-transform: uppercase; 
+    margin: 0px 0 10px 0; 
+}
+
+@mixin vendor-prefix($name, $argument) {
+  #{$name}: $argument;
+  -webkit-#{$name}: $argument;
+  -ms-#{$name}: $argument;
+  -moz-#{$name}: $argument;
+  -o-#{$name}: $argument;
+}

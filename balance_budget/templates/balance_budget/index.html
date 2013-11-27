@@ -1,0 +1,116 @@
+{% extends 'balance_budget/base.html' %}
+
+{% block content %}
+	<div class="content">
+		
+	</div>
+{% endblock %}
+
+{% block jslibs %}
+<!-- JavaScript Includes -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.0/backbone-min.js"></script>
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.1.2/handlebars.min.js"></script>
+{% endblock %}
+{% block customjs %}
+        <script type="text/template" id="list-template">
+          	<h3> <%= description %> <%= name %></h3>
+        </script>
+        <script type="text/template" id="item-template">
+			<li class="proposal row <%= category.slug %>">
+				<div class="eightcol">
+				                   <%= name %>
+				</div>
+				<div class="twocol">
+					<%= value %>
+				</div>
+				<div class="twocol last">
+					<div class="icon-info">
+						<div class="proposal_info" style="display: none;">
+							<h4>Proposal information</h4>
+                      	 	<%= info %>
+            			</div>
+            		</div>
+            	</div>
+            </div>
+			</li>
+        </script>
+	<script>
+
+	$(function(){
+		var Item = Backbone.Model.extend({
+
+		});
+
+		var List = Backbone.Collection.extend({
+		  model: Item,
+		  url: 'http://127.0.0.1:8000/api/category/?format=jsonp'
+		});
+
+
+
+
+		var ItemView = Backbone.View.extend({
+			template: _.template( $("#list-template").html()),
+		  	tagName: 'div', // name of (orphan) root tag in this.el
+		  	initialize: function(){
+		    	_.bindAll(this, 'render'); // every function that uses 'this' as the current object should be in here
+		  		this.collection = new List(this.model.get('sections'));
+		  	},
+		  	render: function(){
+			  	var json = this.model.toJSON();
+			  	listItem = this.model.get('sections');
+			  	
+			  	
+			    $(this.el).html(this.template(this.model.attributes));
+			    var ul = $('<ul />',{"class" : 'proposal_list'});
+			    $(this.el).append(ul);
+			    
+			    _(this.collection.models).each(function(item){ // in case collection is not empty
+			      this.appendItem(item);
+			    }, this);
+			    return this; // for chainable calls, like .render().el
+		  	},
+		  	appendItem: function(item){
+		  	
+		       $('ul',this.el).append( _.template( $("#item-template").html(), item.attributes) );
+		   }
+
+		});
+
+		var ListView = Backbone.View.extend({
+		   el: $('body'), // el attaches to existing element
+		   events: {
+		     'click button#add': 'addItem'
+		   },
+		   initialize: function(){
+		     var self = this;
+		     $.getJSON( "http://127.0.0.1:8000/api/category/?format=jsonp&callback=?", function( json ) {
+		       	 var collectionData = json.objects;
+		     	 self.collection = new List(_.map(collectionData, function(p) { return p }));
+		     	 self.collection.bind('add', self.appendItem); // collection event binder
+		     	 self.counter = 0;
+		     	 self.render();
+		      });
+		   },
+		   render: function(){
+		     var self = this;
+		     _(this.collection.models).each(function(item){ // in case collection is not empty
+		       self.appendItem(item);
+		     }, this);
+		   },
+		    appendItem: function(item){
+		         var itemView = new ItemView({
+		           model: item
+		         });
+		         $(this.el).append(itemView.render().el);
+		       }
+		     });
+
+		     var listView = new ListView();
+
+
+	});
+	</script>
+{% endblock %}
