@@ -3,7 +3,17 @@
 @import "icons";
 
 /*main styles*/
-#seattletimesbudget{
+    ul {
+        margin:0;
+        padding:0;
+    }
+    body {
+        font-family: Arial,Helvetica,sans-serif;
+        color: #303030;
+        font-size: 12px;
+    }
+#balance_budget{
+
     #header{
         margin-bottom:20px;
     }
@@ -353,7 +363,7 @@
         }
     }
     
-    li.general-government {
+    li.test-2 {
         background:darken($color2, 15%);
     
         &.active {
@@ -368,7 +378,7 @@
         }
     }
     
-    li.health-care{
+    li.test-1{
         background:darken($color6, 20%);
         &.active {
             background: darken($color6, 30%);

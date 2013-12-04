@@ -1,9 +1,82 @@
 {% extends 'balance_budget/base.html' %}
 
 {% block content %}
-	<div class="content">
-		
+
+<div class="content" id="balance_budget">
+    <div class="row">      
+       <div class="sevencol proposal_container">
+       		<h3>Budget options</h3>
+		</div> <!-- end seven col -->
+
+
+		 <div class="fivecol budget last" >
+		    <div id="budgetUnique">
+		         <h3>Your budget: <span id="balance_total" class="savings_label"> </span></h3>
+		         <div class="fivecol">
+		             <div class="budget_container">
+		                 <div class="budget_proposal_container">
+		                     <div id="instructions">
+		                     </div>
+		                 {% for benchmark in benchmarks %}
+		                   <div class="line" data="{{benchmark.value}}" style="bottom:{{benchmark.pixelHeight}}px">
+		                   </div>
+		                 {% endfor %}
+		                 <div class="deficit line"> </div>
+		                     <div class="bottom_container">
+		                     {% spaceless %}
+		                      {% for category in categories %}
+		                         {% for section in sections %}
+		                               {% if section.category.name == category.name %} 
+		                                     <li 
+		                                         id='your_budget_section{{ section.id }}' 
+		                                         data="{{ section.value }}" 
+		                                         class="proposal row {{ category.name|slugify }}"
+		                                         style="height:{{ section.pixelHeight }}px"
+		                                     >  
+		                                             <div class="section_inner_wrapper">
+		                                                 <div class="ninecol">
+		                                                     {{ section.name }}
+		                                                 </div>
+		                                                 <div class="threecol last">
+		                                                     ${{ section.valueFormatted }}
+		                                                 </div>
+		                                             </div>
+		                                         </li>
+		                                    {% endif %}
+		                             {% endfor %}
+		                         {% endfor %}
+		             {% endspaceless %}
+		                     </div><!--end bottom_container-->
+		                 </div><!--end budget proposal container-->
+		             </div><!--end budget container-->
+		         </div><!--end ninecol-->
+		         <div class="sevencol last benchmarks">
+		             {% for benchmark in benchmarks %}
+		                <div class="axis_label" style="bottom:{{benchmark.pixelHeight}}px">
+		                     <div class="nested_axis">
+		                          <strong>${{benchmark.formattedValue}}</strong>
+		                          <span class="benchmark_descrip">{{benchmark.description}}</span>
+		                          <span class="benchmark_descrip_mobile">{{benchmark.name}}</span> 
+		                     </div>
+		                </div>
+		             {% endfor %}
+		             <div class="deficit axis_label" id="deficit_label" data="-{{rawDeficit}}">
+		                 <strong>-${{deficit}}B</strong> Current deficit
+		            </div>
+		         </div>
+		     </div><!--end budgetUnique-->
+		</div><!--end fivecol budget last-->
+		<div id="proposal_bottom" class="clear"></div>
+		<div class="row" id="footer">
+		        <div class="twelvecol last">
+		        <p class="copyright">© 2013 <a href="http://seattletimes.com">The Seattle Times</a> | <a href="mailto:webmaster@seattletimes.com">Feedback</a></p>
+		        </div>
+		    </div>
 	</div>
+</div>
+
+
+
 {% endblock %}
 
 {% block jslibs %}
@@ -12,13 +85,34 @@
         <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.0/backbone-min.js"></script>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.1.2/handlebars.min.js"></script>
+        
 {% endblock %}
 {% block customjs %}
         <script type="text/template" id="list-template">
-          	<h3> <%= description %> <%= name %></h3>
+          	<h4> <%= description %> <%= name %></h4>
         </script>
+
+        <script type="text/template" id="your-budget-item-template">
+          	<li 
+          	    id='your_budget_section<%= id %>' 
+          	    data="<%= value %>" 
+          	    class="proposal row <%= category.slug %>"
+          	    style="height:200px"
+          	    draggable="true"
+          	>  
+          	        <div class="section_inner_wrapper">
+          	            <div class="ninecol">
+          	                <%= name %>
+          	            </div>
+          	            <div class="threecol last">
+          	                <%= value %>
+          	            </div>
+          	        </div>
+          	    </li>
+        </script>
+        
         <script type="text/template" id="item-template">
-			<li class="proposal row <%= category.slug %>">
+			<li id="section<%= id %>" class="proposal row <%= category.slug %>" draggable="true" data="<%= value %>">
 				<div class="eightcol">
 				                   <%= name %>
 				</div>
@@ -49,11 +143,10 @@
 		});
 
 
-
-
 		var ItemView = Backbone.View.extend({
 			template: _.template( $("#list-template").html()),
 		  	tagName: 'div', // name of (orphan) root tag in this.el
+		  	className: 'proposal_section category',
 		  	initialize: function(){
 		    	_.bindAll(this, 'render'); // every function that uses 'this' as the current object should be in here
 		  		this.collection = new List(this.model.get('sections'));
@@ -75,12 +168,14 @@
 		  	appendItem: function(item){
 		  	
 		       $('ul',this.el).append( _.template( $("#item-template").html(), item.attributes) );
+		       $('.bottom_container').append( _.template( $("#your-budget-item-template").html(), item.attributes) );
 		   }
 
 		});
-
+		
+		//refactory this view to be extended by your_budget and all_budget_items
 		var ListView = Backbone.View.extend({
-		   el: $('body'), // el attaches to existing element
+		   el: $('.proposal_container'), // el attaches to existing element
 		   events: {
 		     'click button#add': 'addItem'
 		   },
@@ -110,7 +205,7 @@
 
 		     var listView = new ListView();
 
-
 	});
 	</script>
+	<script src="{{ STATIC_URL }}scripts/balance_budget.js"></script>
 {% endblock %}

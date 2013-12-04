@@ -8,19 +8,22 @@
 $.event.props.push('dataTransfer');
      
 $(document).ready(function() {
+    //setTimeout(function(){init();},3000);
     init();
     currentBudgetTotal = parseInt($('#deficit_label').attr('data'),10);
     $('#balance_total').text(convertMoney(currentBudgetTotal)+currentBudgetAbrev);
     var budget = $('.budget');
     var budgetHeight = budget.height();
-    if(budgetHeight > browserHeight){
+    //if(budgetHeight > browserHeight){
        calculateDiv();	
-    }
+    //}
     fixedHeader();
+
     	
 }); /* end of document.ready */
 
 function calculateDiv(){
+  console.log('hell')
     var budgetContainer = $('.budget_container');
     budgetContainer.height(browserHeight-50);
 	var containerHeight = budgetContainer.height();
@@ -43,12 +46,13 @@ function calculateDiv(){
     
 
 function init(){
-     $('.proposal').on({
+     $('body').on({
      'dragstart': dragStart,
      'dragend'  : dragEnd,
      'hover'    : proposalHover,
      'click' : clickDrop
-     }).attr('draggable','true');
+     },'.proposal').attr('draggable','true');
+     console.log($('.proposal'))
      
      
      
@@ -104,11 +108,13 @@ function proposalHover(e){
 
 //drag functions
 function dragStart(ev) {
+  console.log('drag')
     var inactive = $(ev.target).hasClass('inactive');
     if(inactive){
         return false;
     }else{
         ev.dataTransfer.effectAllowed='move';
+
         ev.dataTransfer.setData("Text", ev.target.getAttribute('id'));
         $('.budget_container').addClass('active');
     }
@@ -132,6 +138,7 @@ function dragDrop(ev) {
 //end drag functions
 
 function clickDrop(){
+    console.log('test')
     var idelt = $(this).attr('id');
     var inactive = $(this).hasClass('inactive');
     proposalLogic(idelt);
@@ -140,7 +147,6 @@ function clickDrop(){
 
 
 function proposalLogic(idelt){
-    
     var yourBudgetFlag = idelt.indexOf('your_budget_');
     if (yourBudgetFlag != -1)
     {
@@ -151,7 +157,7 @@ function proposalLogic(idelt){
     }
     
     var divHeight = budget_prop_container.height();
-    var proposal_section = $('.proposal_section #'+idelt.replace("your_budget_",""));
+    var proposal_section = $('.proposal_section #'+idelt.replace('your_budget_',''));
     var budgetDelta = parseFloat(proposal_section.attr('data'));
    
 //adds proposal to budget container
@@ -260,13 +266,13 @@ function convertMoney(value){
 
 function fixedHeader(){
     //modernizer 
-            var msg;
-			if (window.FileReader && Modernizr.draganddrop){
-				msg = 'Drag proposal options here to balance your budget.';	
-			} else {
-				msg = 'Click proposal options on the left to balance your budget.'
-			}	
-			document.getElementById('instructions').innerHTML = msg;
+   //          var msg;
+			// if (window.FileReader && Modernizr.draganddrop){
+			// 	msg = 'Drag proposal options here to balance your budget.';	
+			// } else {
+			// 	msg = 'Click proposal options on the left to balance your budget.'
+			// }	
+			// document.getElementById('instructions').innerHTML = msg;
 			
 //begin fixed header code
 		  var $budgetUnique = $('#budgetUnique');//div to be fixed
