@@ -60,8 +60,8 @@
 		                     </div>
 		                </div>
 		             {% endfor %}
-		             <div class="deficit axis_label" id="deficit_label" data="-{{rawDeficit}}">
-		                 <strong>-${{deficit}}B</strong> Current deficit
+		             <div class="deficit axis_label" id="deficit_label" data="-1000000">
+		                 <strong>-$1m</strong> Current deficit
 		            </div>
 		         </div>
 		     </div><!--end budgetUnique-->
@@ -95,17 +95,18 @@
         <script type="text/template" id="your-budget-item-template">
           	<li 
           	    id='your_budget_section<%= id %>' 
-          	    data="<%= value %>" 
-          	    class="proposal row <%= category.slug %>"
-          	    style="height:200px"
+          	    data="<%= attributes.value %>" 
+          	    class="proposal row <%= attributes.category.slug %>"
           	    draggable="true"
+          	    style="height:<%= getPixelHeight(attributes.value) %>px"
           	>  
           	        <div class="section_inner_wrapper">
           	            <div class="ninecol">
-          	                <%= name %>
+          	                <%= attributes.name %>
+          	                
           	            </div>
           	            <div class="threecol last">
-          	                <%= value %>
+          	                <%= attributes.value %>
           	            </div>
           	        </div>
           	    </li>
@@ -133,7 +134,21 @@
 	<script>
 
 	$(function(){
+		//adds dataTransfer event to jquery
+		$.event.props.push('dataTransfer');
+		
 		var Item = Backbone.Model.extend({
+		getPixelHeight: function(value){
+			
+			var deficit = 100,
+			maxValue = 1000+deficit,
+			budgetContainer = $('.budget_container'),
+			containerHeight = budgetContainer.height(),
+			pixel = value*containerHeight,
+			pixel = pixel/maxValue;
+			
+			return pixel
+		}
 
 		});
 
@@ -143,10 +158,23 @@
 		});
 
 
+
+
+
 		var ItemView = Backbone.View.extend({
 			template: _.template( $("#list-template").html()),
 		  	tagName: 'div', // name of (orphan) root tag in this.el
 		  	className: 'proposal_section category',
+		  	events: {
+		  	  'click .icon-info'         : 'showInfo',
+		  	  'dragstart .proposal'		 : 'dragStart',
+		  	  'dragend .proposal'  		 : 'dragEnd',
+		  	  'hover .proposal'    		 : 'proposalHover',
+		  	  'click .proposal_list .proposal'    		 : 'clickDrop',
+		  	  'dragenter .budget_proposal_container, .proposal_container'  : 'dragEnter',
+		  	  'drop .budget_proposal_container, .proposal_container'       : 'dragDrop',
+		  	  'dragover .budget_proposal_container, .proposal_container'   : 'dragOver'
+		  	},
 		  	initialize: function(){
 		    	_.bindAll(this, 'render'); // every function that uses 'this' as the current object should be in here
 		  		this.collection = new List(this.model.get('sections'));
@@ -168,44 +196,296 @@
 		  	appendItem: function(item){
 		  	
 		       $('ul',this.el).append( _.template( $("#item-template").html(), item.attributes) );
-		       $('.bottom_container').append( _.template( $("#your-budget-item-template").html(), item.attributes) );
+		      
+		       //$('.bottom_container').append( _.template( $("#your-budget-item-template").html(), item) );
+		   },
+		   showInfo: function(e){
+		   		$(e.target).find('.proposal_info').toggle();
+		   		e.stopPropagation();
+		   },
+		   //drag functions
+		   dragStart: function(e) {
+		       var inactive = $(e.target).hasClass('inactive');
+		       if(inactive){
+		           return false;
+		       }else{
+		           e.dataTransfer.effectAllowed='move';
+
+		           e.dataTransfer.setData("Text", e.target.getAttribute('id'));
+		           $('.budget_container').addClass('active');
+		       }
+		   },
+
+		   dragEnd: function(e) {
+		   	e.preventDefault();
+		       $('.budget_container').removeClass('active');
+		   },
+		   dragEnter: function(e) {
+		   		
+		   		e.preventDefault();
+		      return false;
+		   },
+		   dragOver: function(e) {
+		   		e.preventDefault();
+		       return false;
+		   },
+		   dragDrop: function(e) {
+		   	  e.originalEvent.stopPropagation();
+		   	  e.originalEvent.preventDefault();
+		      var idelt = e.dataTransfer.getData("Text");
+		      this.proposalLogic(idelt);
+		      e.stopPropagation();
+		      return false; // return false so the event will not be propagated to the browser
+		   },
+		   //end drag functions
+
+		   clickDrop: function(e){
+		   		console.log('test')
+		   	   e.stopPropagation();
+		       var idelt = $(e.target).closest('.proposal').attr('id');
+		       var inactive = $(e.target).hasClass('inactive');
+		       this.proposalLogic(idelt);
+		       e.stopPropagation();
+		   },
+		   proposalHover: function(e){
+		       var mouseEnter = e.type=='mouseenter';
+		       var proposal = $(this);
+		       proposal.find('.proposal_info').hide();
+		       var id = proposal.attr('id');
+		       var idNumber = id.replace( /^\D+/g, '');
+		       
+		        //mouse enter
+		       if (mouseEnter){
+		           if (id.indexOf('your_budget_section')==-1){
+		               var budgetSection = $('#your_budget_section'+idNumber);
+		               if (budgetSection.css('display')=='list-item'){
+		                   budgetSection.addClass('connected_proposal');
+		                   proposal.addClass('connected_proposal');
+		               }
+		           }else{
+		               $('#section'+idNumber).addClass('connected_proposal');
+		               proposal.addClass('connected_proposal');
+		           }
+		       }else{//mouse leave
+		           if (id.indexOf('your_budget_section')==-1){
+		               var budgetSection = $('#your_budget_section'+idNumber);
+		               if (budgetSection.css('display')=='list-item'){
+		                   budgetSection.removeClass('connected_proposal');
+		                   proposal.removeClass('connected_proposal');
+		               }
+		           }else{
+		               $('#section'+idNumber).removeClass('connected_proposal');
+		               proposal.removeClass('connected_proposal');
+		           }        
+		       }
+		       
+		       proposal.toggleClass('active');    
+		   },
+		   proposalLogic: function(idelt){
+		   	   var currentBudgetTotal = 0;
+		       var yourBudgetFlag = idelt.indexOf('your_budget_');
+		       if (yourBudgetFlag != -1)
+		       {
+		           var budget_prop_container = $('.budget_proposal_container #'+idelt);
+		           
+		       }else{
+		           var budget_prop_container = $('.budget_proposal_container #your_budget_'+idelt);   
+		       }
+		       
+		       var divHeight = budget_prop_container.height();
+		       var proposal_section = $('.proposal_section #'+idelt.replace('your_budget_',''));
+		       var budgetDelta = parseFloat(proposal_section.attr('data'));
+		      
+		   //adds proposal to budget container
+		       if(!proposal_section.hasClass('inactive'))
+		       {
+		       		console.log('inactive');
+		           if (this.calculateBudget(divHeight))
+		           {
+		            budget_prop_container.slideDown();
+		            proposal_section.addClass('inactive');
+		            
+		            currentBudgetTotal = (currentBudgetTotal + budgetDelta);
+		            $('#balance_total').text(this.convertMoney(currentBudgetTotal)+currentBudgetAbrev);
+		            
+		           }else{
+		            window.alert("Amount exceeds capacity. You only need $1.7B to meet the highest goal for education funding. Your current budget: " + this.convertMoney(currentBudgetTotal) + currentBudgetAbrev);
+		           }
+		           return;
+		       }
+		   //removes proposal to budget container
+		       if(proposal_section.hasClass('inactive'))
+		       {
+		       		console.log('active');
+		           if (this.calculateBudget(-divHeight))
+		           {
+		               budget_prop_container.slideUp();
+		               proposal_section.removeClass('inactive');
+		               currentBudgetTotal = (currentBudgetTotal - budgetDelta);
+		               $('#balance_total').text(this.convertMoney(currentBudgetTotal)+currentBudgetAbrev);
+		               proposal_section.removeClass('connected_proposal');
+		           }else{
+		               window.alert("An error occurred when trying to remove a proposal...");
+		           }
+		           return;
+		      }
+		   },
+		   calculateBudget: function(divSize)
+		   {
+		      var mainDiv = $('.budget_proposal_container').height();
+		      var budgDiv = 0;
+		      if ($('.bottom_container').height() > 0)
+		         {budgDiv = $('.bottom_container').height();}
+		      var newBudgDiv = budgDiv + divSize;
+		      if(newBudgDiv < mainDiv)
+		         {
+		         this.checkBenchmarks(budgDiv, newBudgDiv);
+		         return true;
+		         }
+		      else
+		         {return false;}
+		   },
+		   checkBenchmarks: function(oldValue, newValue){
+
+		       $('.line').each(function() {
+		           var goalHeight = $(this).css('bottom');
+		           var benchmarkValue = parseInt(goalHeight,10);
+		           if ((oldValue < benchmarkValue) && (newValue >= benchmarkValue))
+		           {
+		               var goalDiv = $('.axis_label').filter(function () { 
+		                   return $(this).css('bottom') == goalHeight; 
+		               });
+		               goalDiv.append('<div class="icon-checkmark reached_goal"></div>').addClass('active');
+		               
+		           }
+		           if ((oldValue >= benchmarkValue) && (newValue < benchmarkValue))
+		           {
+		               var goalDiv = $('.axis_label').filter(function () { 
+		                   return $(this).css('bottom') == goalHeight; 
+		               });
+		               goalDiv.removeClass('active').find('.icon-checkmark').remove();
+		           }
+		       });
+		   },
+		   convertMoney: function(value){
+		      var negFlag = false;
+		      if (value < 0)
+		      {
+		         value = value * (-1);
+		         negFlag = true;
+		      }
+		      value = value.toString();        // Convert to string
+		      var valueLength = value.length;  // Count string
+		      value = parseInt(value, 10);         // Re-convert to Intiger
+		      if(valueLength >= 10)
+		      {
+		         value = (value / 1000000000);
+		         currentBudgetAbrev = "B";
+		      }
+		      if(valueLength < 10)
+		      {
+		         value = (value / 1000000);
+		         currentBudgetAbrev = "M";
+		      }
+		      value = parseFloat(value).toFixed(2);
+		      if (value === 0) {currentBudgetAbrev = "";}
+		      if (negFlag) {value = '-$'+value;}
+		      else{value = '$'+value;}
+		      
+		      return value;
 		   }
 
+		});
+		var YourBudgetItemView = ItemView.extend({
+		  	el: $('.budget_container'),
+		  	events: {
+		  	  'click .icon-info'         : 'showInfo',
+		  	  'dragstart .proposal'		 : 'dragStart',
+		  	  'dragend .proposal'  		 : 'dragEnd',
+		  	  'hover .proposal'    		 : 'proposalHover',
+		  	  'click .proposal'    		 : 'clickDrop',
+		  	  'dragenter .budget_proposal_container, .proposal_container'  : 'dragEnter',
+		  	  'drop .budget_proposal_container, .proposal_container'       : 'dragDrop',
+		  	  'dragover .budget_proposal_container, .proposal_container'   : 'dragOver'
+		  	},
+		  	initialize: function(){
+
+		  	},
+		  	render: function(){
+			    var self = this;
+			    //refactor this as soon as possible
+			    _(this.collection.models).each(function(item){ // in case collection is not empty
+			    	this.collection = new List(item.get('sections'));
+			    	_(this.collection.models).each(function(item){
+			    		console.log(item);
+			    		self.appendItem(item);
+			    	});
+			    	
+			      
+			      
+			    }, this);
+			    return this; // for chainable calls, like .render().el
+		  	},
+		  	appendItem: function(item){
+		  		this.$el.find('.bottom_container').append( _.template( $("#your-budget-item-template").html(), item) );
+		  		
+		  	 }
 		});
 		
 		//refactory this view to be extended by your_budget and all_budget_items
 		var ListView = Backbone.View.extend({
-		   el: $('.proposal_container'), // el attaches to existing element
-		   events: {
-		     'click button#add': 'addItem'
-		   },
-		   initialize: function(){
-		     var self = this;
-		     $.getJSON( "http://127.0.0.1:8000/api/category/?format=jsonp&callback=?", function( json ) {
-		       	 var collectionData = json.objects;
-		     	 self.collection = new List(_.map(collectionData, function(p) { return p }));
-		     	 self.collection.bind('add', self.appendItem); // collection event binder
-		     	 self.counter = 0;
-		     	 self.render();
-		      });
-		   },
-		   render: function(){
-		     var self = this;
-		     _(this.collection.models).each(function(item){ // in case collection is not empty
-		       self.appendItem(item);
-		     }, this);
-		   },
-		    appendItem: function(item){
+			el: $('.proposal_container'), // el attaches to existing element
+			events: {
+			 'click button#add': 'addItem'
+			},
+			initialize: function(){
+			 	var self = this;
+			 	this.calculateDiv();
+				$.getJSON( "http://127.0.0.1:8000/api/category/?format=jsonp&callback=?", function( json ) {
+					 var collectionData = json.objects;
+					 self.collection = new List(_.map(collectionData, function(p) { return p }));
+					 self.collection.bind('add', self.appendItem); // collection event binder
+					 self.counter = 0;
+					 self.render();
+				});
+
+			},
+			render: function(){
+				var self = this;
+				_(this.collection.models).each(function(item){ // in case collection is not empty
+					self.appendItem(item);
+				}, this);
+				yourBudgetItemView = new YourBudgetItemView({collection: this.collection});
+			    yourBudgetItemView.render();
+			},
+		   	appendItem: function(item){
 		         var itemView = new ItemView({
 		           model: item
 		         });
 		         $(this.el).append(itemView.render().el);
-		       }
+	       },
+	       calculateDiv: function() {
+	       		var browserHeight = window.innerHeight,
+	       		budget = $('.budget'),
+	       		budgetHeight = budget.height();
+
+	       		if(budgetHeight > browserHeight){
+	       			var budgetContainer = $('.budget_container');
+	       			budgetContainer.height(browserHeight-50);
+	       			var containerHeight = budgetContainer.height();   	
+	       		}
+				// $('.line').each(function(i) {
+				//     var value = parseInt($(this).attr('data'))+deficit;
+				//     var pixel = (value * containerHeight)/(parseInt(maxValue)+parseInt(deficit));
+				//     $(this).css('bottom',pixel);
+				//     axisLabels.eq(i).css('bottom',pixel);
+				// });
+	       }
 		     });
 
 		     var listView = new ListView();
 
 	});
 	</script>
-	<script src="{{ STATIC_URL }}scripts/balance_budget.js"></script>
+	
 {% endblock %}
