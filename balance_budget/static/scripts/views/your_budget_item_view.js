@@ -2,10 +2,9 @@ define(function(require)
     {
         var $      = require('jquery'),
         _         = require('underscore'),
-        List     = require('views/list_view'),
-        ItemView = require('views/item_view')
+        List               = require('collections/list'),
+        ItemView = require('views/item_view'),
         yourBudgetItemTemplate = require('text!templates/your_budget_item.html');
-
 
             return YourBudgetItemView = ItemView.extend({
                 el: $('.budget_container'),

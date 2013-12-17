@@ -86,48 +86,9 @@
 {% endblock %}
 {% block customjs %}
         <script type="text/template" id="list-template">
-          	<h4> <%= description %> <%= name %></h4>
+          	
         </script>
 
-        <script type="text/template" id="your-budget-item-template">
-          	<li 
-          	    id='your_budget_section<%= id %>' 
-          	    data="<%= attributes.value %>" 
-          	    class="proposal row <%= attributes.category.slug %>"
-          	    draggable="true"
-          	    style="height:<%= getPixelHeight(attributes.value) %>px"
-          	>  
-          	        <div class="section_inner_wrapper">
-          	            <div class="ninecol">
-          	                <%= attributes.name %>
-          	                
-          	            </div>
-          	            <div class="threecol last">
-          	                <%= attributes.value %>
-          	            </div>
-          	        </div>
-          	    </li>
-        </script>
-        
-        <script type="text/template" id="item-template">
-			<li id="section<%= id %>" class="proposal row <%= category.slug %>" draggable="true" data="<%= value %>">
-				<div class="eightcol">
-				                   <%= name %>
-				</div>
-				<div class="twocol">
-					<%= value %>
-				</div>
-				<div class="twocol last">
-					<div class="icon-info">
-						<div class="proposal_info" style="display: none;">
-							<h4>Proposal information</h4>
-                      	 	<%= info %>
-            			</div>
-            		</div>
-            	</div>
-            </div>
-			</li>
-        </script>
         <script data-main="{{ STATIC_URL }}scripts/main" src="{{ STATIC_URL }}/scripts/require.js"></script>
 	
 {% endblock %}

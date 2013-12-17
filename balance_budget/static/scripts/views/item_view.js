@@ -3,7 +3,8 @@ define(function(require, exports, module)
         var $      = require('jquery'),
             Backbone = require('backbone')
             List               = require('collections/list');
-            listTemplate = require('text!templates/item.html')
+            itemTemplate = require('text!templates/item.html')
+            listTemplate = require('text!templates/list.html')
             
             return ItemView = Backbone.View.extend({
                     template: _.template( listTemplate ),
@@ -24,10 +25,10 @@ define(function(require, exports, module)
                         this.collection = new List(this.model.get('sections'));
                     },
                     render: function(){
-                        console.log('what')
+                       
                         var json = this.model.toJSON();
                         listItem = this.model.get('sections');
-                        
+                        console.log(this.model.attributes)
                         $(this.el).html(this.template(this.model.attributes));
 
                         var ul = $('<ul />',{"class" : 'proposal_list'});
@@ -39,8 +40,8 @@ define(function(require, exports, module)
                         return this; // for chainable calls, like .render().el
                     },
                     appendItem: function(item){
-                    
-                       $('ul',this.el).append( _.template( listTemplate, item.attributes) );
+                     
+                       $('ul',this.el).append( _.template( itemTemplate, item.attributes) );
                       
                        //$('.bottom_container').append( _.template( $("#your-budget-item-template").html(), item) );
                    },
@@ -85,7 +86,7 @@ define(function(require, exports, module)
                    //end drag functions
 
                    clickDrop: function(e){
-                        console.log('test')
+                      
                        e.stopPropagation();
                        var idelt = $(e.target).closest('.proposal').attr('id');
                        var inactive = $(e.target).hasClass('inactive');
@@ -144,7 +145,7 @@ define(function(require, exports, module)
                    //adds proposal to budget container
                        if(!proposal_section.hasClass('inactive'))
                        {
-                            console.log('inactive');
+                            
                            if (this.calculateBudget(divHeight))
                            {
                             budget_prop_container.slideDown();
@@ -161,7 +162,7 @@ define(function(require, exports, module)
                    //removes proposal to budget container
                        if(proposal_section.hasClass('inactive'))
                        {
-                            console.log('active');
+                          
                            if (this.calculateBudget(-divHeight))
                            {
                                budget_prop_container.slideUp();
