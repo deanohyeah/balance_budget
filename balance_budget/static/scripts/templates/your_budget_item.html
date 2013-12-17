@@ -1,0 +1,18 @@
+<li 
+    id='your_budget_section<%= id %>' 
+    data="<%= attributes.value %>" 
+    class="proposal row <%= attributes.category.slug %>"
+    draggable="true"
+    style="height:<%= getPixelHeight(attributes.value) %>px"
+>  
+        <div class="section_inner_wrapper">
+            <div class="ninecol">
+                <%= attributes.name %>
+                
+            </div>
+            <div class="threecol last">
+                <%= attributes.value %>
+            </div>
+        </div>
+    </li>
+    
