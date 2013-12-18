@@ -76,19 +76,8 @@
 </div>
 
 
-
 {% endblock %}
 
 {% block jslibs %}
-<!-- JavaScript Includes -->
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.1.2/handlebars.min.js"></script>
-       
-{% endblock %}
-{% block customjs %}
-        <script type="text/template" id="list-template">
-          	
-        </script>
-
-        <script data-main="{{ STATIC_URL }}scripts/main" src="{{ STATIC_URL }}/scripts/require.js"></script>
-	
+	<script data-main="{{ STATIC_URL }}scripts/main" src="{{ STATIC_URL }}/scripts/require.js"></script>
 {% endblock %}

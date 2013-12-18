@@ -30,4 +30,10 @@ class CategoryResource(ModelResource):
         resource_name = 'category'
         max_limit = None
 
+class BenchmarkResource(ModelResource):
+
+    class Meta:
+        queryset = Benchmark.objects.all()
+        resource_name = 'benchmark'
+        max_limit = None
 
