@@ -74,7 +74,10 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 
-DATABASES['default'] =  dj_database_url.config()
+DATABASES = {
+
+}
+
 
 
 # Parse database configuration from $DATABASE_URL
