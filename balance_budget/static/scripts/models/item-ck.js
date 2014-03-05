@@ -1,0 +1,1 @@
+define(function(e,t,n){var r=e("jquery"),i=e("backbone");return Item=i.Model.extend({initialize:function(){this.deficit=0;this.maxValue=2e3+this.deficit},getPixelHeight:function(e){var t=r(".budget_container"),n=t.height(),i=e*n,i=i/this.maxValue;return i},getPixelHeightBenchmarks:function(e){var t=500,e=e+this.deficit,n=e*t,n=n/this.maxValue;return n}})});

@@ -23,6 +23,7 @@ define(function(require, exports, module)
                     initialize: function(){
                         _.bindAll(this, 'render'); // every function that uses 'this' as the current object should be in here
                         this.collection = new List(this.model.get('sections'));
+                        window.currentBudgetTotal = 0;
                     },
                     render: function(){
                        
@@ -129,7 +130,7 @@ define(function(require, exports, module)
                    },
                    proposalLogic: function(idelt){
                     // todo: get rid of this and use adding to a new collection
-                       var currentBudgetTotal = 0;
+                       
                        var yourBudgetFlag = idelt.indexOf('your_budget_');
                        if (yourBudgetFlag != -1)
                        {
@@ -151,12 +152,12 @@ define(function(require, exports, module)
                            {
                             budget_prop_container.slideDown();
                             proposal_section.addClass('inactive');
-                            
-                            currentBudgetTotal = (currentBudgetTotal + budgetDelta);
-                            $('#balance_total').text(this.convertMoney(currentBudgetTotal)+currentBudgetAbrev);
+                
+                            window.currentBudgetTotal = (window.currentBudgetTotal + budgetDelta);
+                            $('#balance_total').text(this.convertMoney(window.currentBudgetTotal)+currentBudgetAbrev);
                             
                            }else{
-                            window.alert("Amount exceeds capacity. You only need $1.7B to meet the highest goal for education funding. Your current budget: " + this.convertMoney(currentBudgetTotal) + currentBudgetAbrev);
+                            window.alert("Amount exceeds capacity. You only need $2000 to meet the highest goal for transportation funding. Your current budget: " + this.convertMoney(window.currentBudgetTotal) + currentBudgetAbrev);
                            }
                            return;
                        }
@@ -168,8 +169,8 @@ define(function(require, exports, module)
                            {
                                budget_prop_container.slideUp();
                                proposal_section.removeClass('inactive');
-                               currentBudgetTotal = (currentBudgetTotal - budgetDelta);
-                               $('#balance_total').text(this.convertMoney(currentBudgetTotal)+currentBudgetAbrev);
+                               window.currentBudgetTotal = (window.currentBudgetTotal - budgetDelta);
+                               $('#balance_total').text(this.convertMoney(window.currentBudgetTotal)+currentBudgetAbrev);
                                proposal_section.removeClass('connected_proposal');
                            }else{
                                window.alert("An error occurred when trying to remove a proposal...");
@@ -221,6 +222,7 @@ define(function(require, exports, module)
                          value = value * (-1);
                          negFlag = true;
                       }
+
                       value = value.toString();        // Convert to string
                       var valueLength = value.length;  // Count string
                       value = parseInt(value, 10);         // Re-convert to Intiger
@@ -229,16 +231,19 @@ define(function(require, exports, module)
                          value = (value / 1000000000);
                          currentBudgetAbrev = "B";
                       }
-                      if(valueLength < 10)
+                      else if(valueLength < 10 && valueLength > 6)
                       {
                          value = (value / 1000000);
                          currentBudgetAbrev = "M";
+                      }else{
+                        currentBudgetAbrev = '';
                       }
+
                       value = parseFloat(value).toFixed(2);
                       if (value === 0) {currentBudgetAbrev = "";}
                       if (negFlag) {value = '-$'+value;}
                       else{value = '$'+value;}
-                      
+      
                       return value;
                    }
 
