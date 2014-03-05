@@ -15,7 +15,6 @@ define(function(require, exports, module)
             },
 
             initialize: function(){
-                console.log('bla')
                 var self = this;
                 this.collection = new Benchmarks();
                 this.collection.fetch({
@@ -34,7 +33,8 @@ define(function(require, exports, module)
             },
 
             appendItem: function(item){
-                this.$el.append(this.template(item.attributes));
+                console.log(item)
+                this.$el.append(this.template(item));
             }
         });
 	}

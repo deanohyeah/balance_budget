@@ -128,6 +128,7 @@ define(function(require, exports, module)
                        proposal.toggleClass('active');    
                    },
                    proposalLogic: function(idelt){
+                    // todo: get rid of this and use adding to a new collection
                        var currentBudgetTotal = 0;
                        var yourBudgetFlag = idelt.indexOf('your_budget_');
                        if (yourBudgetFlag != -1)

@@ -8,10 +8,6 @@ define(function(require)
         Benchmarks             = require('views/benchmark_view'),
         yourBudgetItemTemplate = require('text!templates/your_budget_item.html');
 
-
-
-
-
         return YourBudgetItemView = ItemView.extend({
             el: '.budget_container',
             

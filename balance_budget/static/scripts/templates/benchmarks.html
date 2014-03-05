@@ -1,7 +1,7 @@
-<div class="axis_label" style="bottom:{{benchmark.pixelHeight}}px">
+<div class="axis_label" style="bottom:<%= getPixelHeightBenchmarks(attributes.value) %>px">
     <div class="nested_axis">
-         <strong>${{benchmark.formattedValue}}</strong>
-         <span class="benchmark_descrip"><%= description %></span>
-         <span class="benchmark_descrip_mobile"><%= name %></span> 
+         <strong>$<%= attributes.value %></strong>
+         <span class="benchmark_descrip"><%= attributes.description %></span>
+         <span class="benchmark_descrip_mobile"><%= attributes.name %></span> 
     </div>
 </div>

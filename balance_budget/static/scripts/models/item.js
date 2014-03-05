@@ -12,7 +12,17 @@ define(function(require, exports, module)
         		pixel = value*containerHeight,
         		pixel = pixel/maxValue;
         		return pixel
-        	}
+        	},
+            getPixelHeightBenchmarks: function(value){
+                var 
+                containerHeight = 500,
+                deficit  = 300,
+                value    = value+deficit, //offsets the deficit
+                maxValue = 900+deficit,
+                pixel    = value*containerHeight,
+                pixel    = pixel/maxValue;
+                return pixel;
+            }
     	});
     }
 );
