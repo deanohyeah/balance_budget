@@ -7,7 +7,7 @@ define(function(require, exports, module)
              
     	return List = Backbone.Collection.extend({
     	  model: Item,
-    	  url: '/api/v1/benchmark/?format=jsonp',
+    	  url: '/api/v1/benchmark/?format=jsonp&callback=?',
           parse: function(response) {
               this.recent_meta = response.meta || {};
               return response.objects || response;
