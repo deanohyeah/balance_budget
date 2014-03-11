@@ -29,7 +29,6 @@ define(function(require, exports, module)
                        
                         var json = this.model.toJSON();
                         listItem = this.model.get('sections');
-                        console.log(this.model.attributes)
                         $(this.el).html(this.template(this.model.attributes));
 
                         var ul = $('<ul />',{"class" : 'proposal_list'});
@@ -41,14 +40,15 @@ define(function(require, exports, module)
                         return this; // for chainable calls, like .render().el
                     },
                     appendItem: function(item){
-                     
-                       $('ul',this.el).append( _.template( itemTemplate, item.attributes) );
+
+                      $('ul',this.el).append( _.template( itemTemplate, item.attributes) );
                       
-                       //$('.bottom_container').append( _.template( $("#your-budget-item-template").html(), item) );
                    },
                    showInfo: function(e){
-                        $(e.target).find('.proposal_info').toggle();
-                        e.stopPropagation();
+                      var element = $(e.target).find('.proposal_info');
+                      $('.proposal_info.show').not(element).toggle().toggleClass('show');
+                      element.toggle().toggleClass('show');
+                      e.stopPropagation();
                    },
                    //drag functions
                    dragStart: function(e) {
@@ -67,6 +67,7 @@ define(function(require, exports, module)
                     e.preventDefault();
                        $('.budget_container').removeClass('active');
                    },
+                   
                    dragEnter: function(e) {
                         
                         e.preventDefault();
@@ -89,10 +90,18 @@ define(function(require, exports, module)
                    clickDrop: function(e){
                       
                        e.stopPropagation();
-                       var idelt = $(e.target).closest('.proposal').attr('id');
-                       var inactive = $(e.target).hasClass('inactive');
+                       var 
+                       id = $(e.target).data('id'),
+                       model = this.collection.get(id),
+                       selected = model.get('selected'),
+                       idelt = $(e.target).closest('.proposal').attr('id'),
+                       inactive = $(e.target).hasClass('inactive');
+                       model.set('selected', this.toggleSelected(selected))
                        this.proposalLogic(idelt);
-                       e.stopPropagation();
+                   },
+                   toggleSelected: function(selected){
+                      return selected ? false : true
+
                    },
                    proposalHover: function(e){
                        var mouseEnter = e.type=='mouseenter';

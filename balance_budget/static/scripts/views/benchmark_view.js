@@ -33,7 +33,6 @@ define(function(require, exports, module)
             },
 
             appendItem: function(item){
-                console.log(item)
                 this.$el.append(this.template(item));
             }
         });

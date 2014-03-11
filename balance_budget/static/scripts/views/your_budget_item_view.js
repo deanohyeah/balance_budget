@@ -25,7 +25,8 @@ define(function(require)
             initialize: function(){
                 // overide ItemView init
                 var test = new Benchmarks();
-                console.log(test)
+                console.log(this.collection)
+                this.collection.on('change:selected', function(){console.log('change')}, this)
             },
 
             render: function(){

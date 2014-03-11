@@ -3,7 +3,7 @@
     data="<%= attributes.value %>" 
     class="proposal row <%= attributes.category.slug %>"
     draggable="true"
-    style="height:<%= getPixelHeight(attributes.value) %>px"
+    style="height:<%= getPixelHeight(attributes.value) %>px; display:<%= display() %>"
 >  
         <div class="section_inner_wrapper">
             <div class="ninecol">
