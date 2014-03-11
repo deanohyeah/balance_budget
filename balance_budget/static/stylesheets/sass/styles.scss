@@ -13,6 +13,7 @@
         font-size: 12px;
     }
 #balance_budget{
+    max-width: 1020px;
 
     #header{
         margin-bottom:20px;
@@ -79,6 +80,7 @@
     }
     /*proposals*/
     .proposal_section {
+        max-width: 600px;
         h4 {
             text-transform:uppercase;
             color:#333;
@@ -127,8 +129,9 @@
     .proposal{
         cursor:e-resize;
         /*@include rounded_corners;*/
-        padding:5px;
-        color:#fff;
+        padding: 5px;
+        color: #fff;
+        box-sizing: border-box;
     }
     
     .inactive {
