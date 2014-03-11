@@ -12,14 +12,14 @@ define(function(require)
             el: '.budget_container',
             
             events: {
-            'click .icon-info'         : 'showInfo',
-            'dragstart .proposal'    : 'dragStart',
-            'dragend .proposal'      : 'dragEnd',
-            'hover .proposal'        : 'proposalHover',
-            'click .proposal'        : 'clickDrop',
-            'dragenter .budget_proposal_container, .proposal_container'  : 'dragEnter',
-            'drop .budget_proposal_container, .proposal_container'       : 'dragDrop',
-            'dragover .budget_proposal_container, .proposal_container'   : 'dragOver'
+                'click .icon-info'         : 'showInfo',
+                'dragstart .proposal'    : 'dragStart',
+                'dragend .proposal'      : 'dragEnd',
+                'hover .proposal'        : 'proposalHover',
+                'click .proposal'        : 'clickDrop',
+                'dragenter .budget_proposal_container, .proposal_container'  : 'dragEnter',
+                'drop .budget_proposal_container, .proposal_container'       : 'dragDrop',
+                'dragover .budget_proposal_container, .proposal_container'   : 'dragOver'
             },
 
             initialize: function(){
