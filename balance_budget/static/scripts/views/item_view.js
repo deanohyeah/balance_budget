@@ -67,7 +67,7 @@ define(function(require, exports, module)
                     e.preventDefault();
                        $('.budget_container').removeClass('active');
                    },
-                   
+
                    dragEnter: function(e) {
                         
                         e.preventDefault();
@@ -88,15 +88,15 @@ define(function(require, exports, module)
                    //end drag functions
 
                    clickDrop: function(e){
-                      
                        e.stopPropagation();
                        var 
-                       id = $(e.target).data('id'),
-                       model = this.collection.get(id),
-                       selected = model.get('selected'),
+                       //id = $(e.currentTarget).data('id'),
+                       //model = this.collection.get(id),
+                       //selected = model.get('selected'),
                        idelt = $(e.target).closest('.proposal').attr('id'),
                        inactive = $(e.target).hasClass('inactive');
-                       model.set('selected', this.toggleSelected(selected))
+                       
+                       //model.set('selected', this.toggleSelected(selected))
                        this.proposalLogic(idelt);
                    },
                    toggleSelected: function(selected){
