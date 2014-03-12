@@ -6,12 +6,14 @@
 	border-radius:$pixels;
 }
 
-$color1: #6a8b95; /*k12 edu */
-$color2: #b16a6a; /*general gov */
+$color1: #016699; /*k12 edu */
+// $color1: #6a8b95;
+$color2: #329797;
+//$color2: #b16a6a; /*general gov */
 $color3: #ddb981; /*higher edu*/
 $color4: #fd8a23; /*k12 edu */
 $color5: #c4d0d6; /*public safety*/
-$color6: #88aeb7; /* health care */
+$color6: #986598; /* health care */
 $color7: #3288BD; /*social services*/
 $color8: #956a77; /*state employees*/
 $color9: #74a896; /*taxes*/
@@ -28,7 +30,7 @@ $color6: #3288BD;
 $color7: #3288BD;
 $color8: #66C2A5;
 $color9: #3288BD;*/
-
+$darkText: #303030;
 $benchmarkgreen: #4d8330;
 $darkgray: #333;
 $mediumgray: #666;

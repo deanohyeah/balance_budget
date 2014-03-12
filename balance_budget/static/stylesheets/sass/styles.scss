@@ -9,7 +9,7 @@
     }
     body {
         font-family: Arial,Helvetica,sans-serif;
-        color: #303030;
+        color: $darkText;
         font-size: 12px;
     }
 #balance_budget{
@@ -111,14 +111,15 @@
         left: -200px;
         top: 25px;
         width:400px;
+        color: $darkText;
+        line-height: 1.2rem;
         background: white;
-        color: black;
         z-index: 10000;
-        padding: 20px 20px 20px 20px;
+        padding: 15px;
         font-weight: normal;
         font-style: normal;
         text-align: left;
-        font-family:georgia, serif;
+        font-family: Helvetica, sans-serif;
         font-size:14px;
         box-shadow:0px 0px 10px $darkgray!important;
         h4 {
@@ -131,7 +132,7 @@
     .proposal{
         cursor:e-resize;
         /*@include rounded_corners;*/
-        padding: 5px;
+        padding: 10px 5px;
         color: #fff;
         box-sizing: border-box;
     }
@@ -196,23 +197,23 @@
         height:100%;
     }
     #instructions {
-        width:80%;
-        margin:0px auto;
-        font-size:1.2em;
-        color:#999;
-        text-align:center;
-        top:36%;
-        position:relative;
-        z-index:0;
+        width: 80%;
+        margin: 0px auto;
+        font-size: 1.2em;
+        color: #999;
+        text-align: center;
+        top: 5%;
+        position: relative;
+        z-index: 0;
     }
     .section_label {
-        color:#fff;
-        background:#000;
+        color: #fff;
+        background: #000;
         opacity: .5;
-        width:30%;
-        margin:0px auto;
-        padding:10px;
-        text-align:center;
+        width: 30%;
+        margin: 0px auto;
+        padding: 10px;
+        text-align: center;
     }
     .axis_label {
         display:block;  
@@ -305,7 +306,7 @@
     
     .fixed {
             position: fixed;
-            top: 50px;
+            top: 0;
             z-index: 2;
             background: white;
             /*
@@ -354,16 +355,16 @@
     }
     .icon-info:hover{cursor: pointer;}
     li.k-12-education, li.congestion-relief {
-        background:darken($color4, 20%);
+        background:darken($color1, 0%);
         &.active {
-            background: darken($color4, 30%);
+            background: darken($color1, 30%);
         }
         .icon-info:before,
         &.connected_proposal,
         &.connected_proposal strong,
         &:hover,
         &:hover strong {
-            color:lighten($color4, 20%)!important;
+            color:lighten($color1, 20%)!important;
         }
     }
     
