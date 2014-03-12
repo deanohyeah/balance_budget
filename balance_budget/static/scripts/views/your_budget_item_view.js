@@ -57,7 +57,7 @@ define(function(require)
                   var fixed,hugged; //booleans for logic switching
                   $budgetUnique.width(budget.width()); //sets width of fixed item. Need this for percentage widths
             
-                $(window).scroll(function() {
+                $(window).scroll(_.throttle(function() {
                     if (!containerStart && !footerStart){
                         // must be defined in event Gives false results on mediaqueries
                         containerStart = budget.offset().top-containerOffset;
@@ -95,7 +95,7 @@ define(function(require)
                         //console.log('5');
                     }
                     
-                });//end windowscroll
+                }, 100));//end windowscroll
             }
 
 
