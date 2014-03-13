@@ -1,0 +1,1 @@
+define(function(e,t,n){var r=e("jquery"),i=e("backbone"),s=e("models/item"),o=e("collections/sections");return List=i.Collection.extend({model:s,url:"/api/v1/category/?format=jsonp&callback=?",parse:function(e){this.recent_meta=e.meta||{};_.each(e.objects,function(e){e.sections=new o(e.sections)});return e.objects||e}})});

@@ -33,7 +33,7 @@ define(function(require)
                 //refactor this as soon as possible
                 //
                 _(this.collection.models).each(function(item){ // in case collection is not empty
-                    this.collection = new List(item.get('sections'));
+                    this.collection = item.get('sections');
                     _(this.collection.models).each(function(item){
                         self.appendItem(item);
                     });

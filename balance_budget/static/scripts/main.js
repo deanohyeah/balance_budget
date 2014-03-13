@@ -15,7 +15,7 @@ requirejs.config({
     }
 });
 
-define(function(require) {
+define(function(require, exports, module) {
 
         var $ = require('jquery'),
         	_         = require('underscore'),

@@ -22,17 +22,16 @@ define(function(require, exports, module)
                     },
                     initialize: function(){
                         _.bindAll(this, 'render'); // every function that uses 'this' as the current object should be in here
-                        this.collection = new List(this.model.get('sections'));
+                        this.collection = this.model.get('sections');
                         window.currentBudgetTotal = 0;
                     },
                     render: function(){
                        
                         var json = this.model.toJSON();
-                        listItem = this.model.get('sections');
                         $(this.el).html(this.template(this.model.attributes));
 
                         var ul = $('<ul />',{"class" : 'proposal_list'});
-                        $(this.el).append(ul);
+                        this.$el.append(ul);
                         
                         _(this.collection.models).each(function(item){ // in case collection is not empty
                           this.appendItem(item);
