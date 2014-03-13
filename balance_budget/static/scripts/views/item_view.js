@@ -1,17 +1,17 @@
 define(function(require, exports, module) 
   {
-        var $      = require('jquery'),
-            Backbone = require('backbone')
-            List               = require('collections/list');
-            itemTemplate = require('text!templates/item.html')
-            listTemplate = require('text!templates/list.html')
+        var $            = require('jquery'),
+            Backbone     = require('backbone'),
+            List         = require('collections/list'),
+            itemTemplate = require('text!templates/item.html'),
+            SectionView  = require('views/section_view'),
+            listTemplate = require('text!templates/list.html');
             
             return ItemView = Backbone.View.extend({
                     template: _.template( listTemplate ),
                     tagName: 'div', // name of (orphan) root tag in this.el
                     className: 'proposal_section category',
                     events: {
-                      'click .icon-info'         : 'showInfo',
                       'dragstart .proposal'      : 'dragStart',
                       'dragend .proposal'        : 'dragEnd',
                       'hover .proposal'          : 'proposalHover',
@@ -20,12 +20,12 @@ define(function(require, exports, module)
                       'drop .budget_proposal_container, .proposal_container'       : 'dragDrop',
                       'dragover .budget_proposal_container, .proposal_container'   : 'dragOver'
                     },
-                    initialize: function(){
+                    initialize: function() {
                         _.bindAll(this, 'render'); // every function that uses 'this' as the current object should be in here
                         this.collection = this.model.get('sections');
                         window.currentBudgetTotal = 0;
                     },
-                    render: function(){
+                    render: function() {
                        
                         var json = this.model.toJSON();
                         $(this.el).html(this.template(this.model.attributes));
@@ -38,16 +38,9 @@ define(function(require, exports, module)
                         }, this);
                         return this; // for chainable calls, like .render().el
                     },
-                    appendItem: function(item){
+                    appendItem: function(item) {
 
-                      $('ul',this.el).append( _.template( itemTemplate, item.attributes) );
-                      
-                   },
-                   showInfo: function(e){
-                      var element = $(e.target).find('.proposal_info');
-                      $('.proposal_info.show').not(element).toggle().toggleClass('show');
-                      element.toggle().toggleClass('show');
-                      e.stopPropagation();
+                      $('ul',this.el).append( new SectionView({model:item}).render().el )
                    },
                    //drag functions
                    dragStart: function(e) {
@@ -97,10 +90,6 @@ define(function(require, exports, module)
                        
                        //model.set('selected', this.toggleSelected(selected))
                        this.proposalLogic(idelt);
-                   },
-                   toggleSelected: function(selected){
-                      return selected ? false : true
-
                    },
                    proposalHover: function(e){
                        var mouseEnter = e.type=='mouseenter';
@@ -158,8 +147,8 @@ define(function(require, exports, module)
                             
                            if (this.calculateBudget(divHeight))
                            {
-                            budget_prop_container.slideDown();
-                            proposal_section.addClass('inactive');
+                            // budget_prop_container.slideDown();
+                            // proposal_section.addClass('inactive');
                 
                             window.currentBudgetTotal = (window.currentBudgetTotal + budgetDelta);
                             $('#balance_total').text(this.convertMoney(window.currentBudgetTotal)+currentBudgetAbrev);
@@ -175,8 +164,8 @@ define(function(require, exports, module)
                           
                            if (this.calculateBudget(-divHeight))
                            {
-                               budget_prop_container.slideUp();
-                               proposal_section.removeClass('inactive');
+                               //budget_prop_container.slideUp();
+                               //proposal_section.removeClass('inactive');
                                window.currentBudgetTotal = (window.currentBudgetTotal - budgetDelta);
                                $('#balance_total').text(this.convertMoney(window.currentBudgetTotal)+currentBudgetAbrev);
                                proposal_section.removeClass('connected_proposal');

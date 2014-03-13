@@ -35,7 +35,7 @@ define(function(require, exports, module)
               self.appendItem(item);
             }, this);
             yourBudgetItemView = new YourBudgetItemView({collection: this.collection});
-              yourBudgetItemView.render();
+            yourBudgetItemView.render();
           },
 
         appendItem: function(item){

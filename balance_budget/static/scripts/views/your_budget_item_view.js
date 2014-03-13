@@ -5,8 +5,8 @@ define(function(require)
         _                      = require('underscore'),
         List                   = require('collections/list'),
         ItemView               = require('views/item_view'),
-        Benchmarks             = require('views/benchmark_view'),
-        yourBudgetItemTemplate = require('text!templates/your_budget_item.html');
+        Benchmarks             = require('views/benchmark_view')
+        BudgetSectionView      = require('views/budget_section_view');
 
         return YourBudgetItemView = ItemView.extend({
             el: '.budget_container',
@@ -43,7 +43,7 @@ define(function(require)
             },
 
             appendItem: function(item){
-                this.$el.find('.bottom_container').append( _.template( yourBudgetItemTemplate, item) );
+                this.$el.find('.bottom_container').append( new BudgetSectionView({model: item}).render().el );
             },
 
             fixedHeader: function(){
