@@ -166,7 +166,7 @@ function proposalLogic(idelt){
          $('#balance_total').text(convertMoney(currentBudgetTotal)+currentBudgetAbrev);
          
         }else{
-         window.alert("Amount exceeds capacity. You only need $1.7B to meet the highest goal for education funding. Your current budget: " + convertMoney(currentBudgetTotal) + currentBudgetAbrev);
+         window.alert("You’ve tried to enter more than $2,000 of investments.  Can you trim down your top priorities to $500 or less?  Your current investment: " + convertMoney(currentBudgetTotal) + currentBudgetAbrev);
         }
         return;
     }
