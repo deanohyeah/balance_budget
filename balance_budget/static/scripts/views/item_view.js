@@ -172,7 +172,7 @@ define(function(require, exports, module)
                             
                            }else{
 
-                            html = '<div class="alert">You’ve tried to enter more than <strong>$2,000<strong> of investments.  Can you trim down your top priorities to $500 or less?  <strong>Your current investment:</strong> ' + this.convertMoney(window.currentBudgetTotal) + currentBudgetAbrev+'</div>'
+                            html = '<div class="alert">You’ve tried to enter more than <strong>$2,000</strong> of investments.  Can you trim down your top priorities to $500 or less?  <strong>Your current investment:</strong> ' + this.convertMoney(window.currentBudgetTotal) + currentBudgetAbrev+'</div>'
                             console.log(html)
                             $('#balance_budget').prepend(html)
                            }
