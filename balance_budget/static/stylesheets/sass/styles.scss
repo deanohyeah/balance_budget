@@ -13,6 +13,31 @@
         font-size: 12px;
     }
 #balance_budget{
+    .alert {
+        background-color: #f2dede;
+        border-color: #ebccd1;
+        color: #a94442;
+        position: absolute;
+        z-index: 5;
+        top: 0%;
+        max-width: 300px;
+        left: 31%;
+        padding: 15px;
+        border-radius: 4px;
+        box-sizing: border-box;
+        &:after {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            content: 'x';
+            top: 0;
+            right: 0;
+            line-height: 1.2em;
+            color: #B2B2B2;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    }
     max-width: 1020px;
 
     #header{

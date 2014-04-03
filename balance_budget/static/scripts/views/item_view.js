@@ -24,6 +24,12 @@ define(function(require, exports, module)
                         _.bindAll(this, 'render'); // every function that uses 'this' as the current object should be in here
                         this.collection = this.model.get('sections');
                         window.currentBudgetTotal = 0;
+                        $('#balance_budget').on('click', '.alert',
+                          function(e){
+                            $(e.target).fadeOut(500, function(){
+                              $(this).remove();
+                            });
+                          })
                     },
                     render: function(){
                        
@@ -155,7 +161,7 @@ define(function(require, exports, module)
                    //adds proposal to budget container
                        if(!proposal_section.hasClass('inactive'))
                        {
-                            
+                           $('#balance_budget .alert').remove() 
                            if (this.calculateBudget(divHeight))
                            {
                             budget_prop_container.slideDown();
@@ -165,13 +171,17 @@ define(function(require, exports, module)
                             $('#balance_total').text(this.convertMoney(window.currentBudgetTotal)+currentBudgetAbrev);
                             
                            }else{
-                            window.alert("Amount exceeds capacity. You only need $2000 to meet the highest goal for transportation funding. Your current budget: " + this.convertMoney(window.currentBudgetTotal) + currentBudgetAbrev);
+
+                            html = '<div class="alert">You’ve tried to enter more than <strong>$2,000<strong> of investments.  Can you trim down your top priorities to $500 or less?  <strong>Your current investment:</strong> ' + this.convertMoney(window.currentBudgetTotal) + currentBudgetAbrev+'</div>'
+                            console.log(html)
+                            $('#balance_budget').prepend(html)
                            }
                            return;
                        }
                    //removes proposal to budget container
                        if(proposal_section.hasClass('inactive'))
                        {
+                          $('#balance_budget .alert').remove()
                           
                            if (this.calculateBudget(-divHeight))
                            {
