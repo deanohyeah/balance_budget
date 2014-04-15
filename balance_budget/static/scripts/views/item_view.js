@@ -32,13 +32,13 @@ define(function(require, exports, module)
                           })
                     },
                     render: function(){
-                        this.html;
+                        this.html = '';
                         var json = this.model.toJSON();
                         $(this.el).html(this.template(this.model.attributes));
 
                         var ul = $('<ul />',{"class" : 'proposal_list'});
                         this.$el.append(ul);
-                        _(this.collection.models).each(function(item){ // in case collection is not empty
+                        _(this.collection.models).each(function(item){
 
                           this.appendItem(item);
                         }, this);
@@ -47,7 +47,9 @@ define(function(require, exports, module)
                         return this; // for chainable calls, like .render().el
                     },
                     appendItem: function(item){
-                      this.html += _.template( itemTemplate, item.attributes)
+                      if (item) {
+                        this.html += _.template( itemTemplate, item.attributes)
+                      }
                    },
                    showInfo: function(e){
                       var element = $(e.target).find('.proposal_info');

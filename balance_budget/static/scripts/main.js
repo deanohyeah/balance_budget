@@ -2,7 +2,7 @@ requirejs.config({
     paths: {
       "jquery": "//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min",
       'underscore': '//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min',
-      "backbone": '//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.0/backbone-min',
+      "backbone": '//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.0/backbone-min'
     },
     shim: {
       underscore: {
