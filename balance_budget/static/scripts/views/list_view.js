@@ -5,7 +5,8 @@ define(function(require, exports, module)
         _                = require('underscore'),
         Backbone       = require('backbone'),
         YourBudgetItemView = require('views/your_budget_item_view'),
-        List               = require('collections/list');
+        List               = require('collections/list'),
+        ItemView           = require('views/item_view');
             
         return ListView = Backbone.View.extend({
       
@@ -34,13 +35,15 @@ define(function(require, exports, module)
               self.appendItem(item);
             }, this);
             yourBudgetItemView = new YourBudgetItemView({collection: this.collection});
-              yourBudgetItemView.render();
+            yourBudgetItemView.render();
           },
 
         appendItem: function(item){
+
              var itemView = new ItemView({
               model: item
              });
+
              this.$el.append(itemView.render().el);
           },
 
