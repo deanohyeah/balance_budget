@@ -26,7 +26,6 @@ define(function(require, exports, module)
                         self.render()
                     }
                 })
-                console.log(this.collection)
           },
 
           render: function(){

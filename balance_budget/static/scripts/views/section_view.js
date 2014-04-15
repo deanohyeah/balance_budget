@@ -25,7 +25,6 @@ define(function(require)
             },
             
             update: function(e){
-                console.log(this.view.el)
                 this.view.$el.toggleClass('inactive')
             },
 
